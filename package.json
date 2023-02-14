@@ -1,7 +1,7 @@
 {
   "name": "slarpg-textbox",
   "version": "0.1.0",
-  "homepage": "https://slarpg-textbox.github.io/react-gh-pages", 
+  "homepage": "https://slarpg-textbox.github.io", 
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
