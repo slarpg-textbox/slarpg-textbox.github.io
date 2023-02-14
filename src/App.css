@@ -4,15 +4,33 @@
 }
 
 div {
-  margin: 20px 5px;
+  margin: 10px 5px;
 }
 
 .container {
   font-family: ChinaCat, Roboto, calibri;
   background-color: #333;
-  width: 500px;
+  max-width: 500px;
+  max-height: 120px;
   display: flex;
   vertical-align: center;
+  font-weight: bold;
+}
+
+.container p {
+  margin: 0 0 5px 0;
+}
+
+#text {
+  max-width: 300px;
+  word-wrap: break-word;
+  margin-left: 10px;
+  /* font-size: 22px; */
+}
+
+.dialogue-style {
+  display: inline-block;
+  margin-right: 50px;
 }
 
 #image {
@@ -27,4 +45,9 @@ div {
 
 #description {
   color: white;
+}
+
+.footer {
+  position: absolute;
+  bottom: 10px;
 }
