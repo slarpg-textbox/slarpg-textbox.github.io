@@ -4,5 +4,27 @@
 }
 
 div {
+  margin: 20px 5px;
+}
+
+.container {
   font-family: ChinaCat, Roboto, calibri;
+  background-color: #333;
+  width: 500px;
+  display: flex;
+  vertical-align: center;
+}
+
+#image {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+}
+
+#subject {
+  color: yellow;
+}
+
+#description {
+  color: white;
 }
