@@ -1,0 +1,8 @@
+@font-face {
+  font-family: ChinaCat;
+  src: url(assets/chinacat.ttf);
+}
+
+div {
+  font-family: ChinaCat, Roboto, calibri;
+}

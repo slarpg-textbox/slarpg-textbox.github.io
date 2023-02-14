@@ -1,1 +1,7 @@
-# slarpg-textbox.github.io
+SLARPG Textbox web app
+
+Run using 
+```
+npm install
+npm start
+```
