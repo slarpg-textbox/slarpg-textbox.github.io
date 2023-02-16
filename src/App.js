@@ -39,11 +39,7 @@ const App = () => {
         <div>
           <span>Dialogue:</span>
           <br />
-          <textarea
-            value={dialogue}
-            maxLength="120"
-            onChange={handleTextDialogue}
-          ></textarea>
+          <textarea value={dialogue} onChange={handleTextDialogue}></textarea>
         </div>
         <div class="dialogue-style">
           <span>Dialogue size:</span>
@@ -98,13 +94,18 @@ const App = () => {
 
       <div class="container">
         <div id="image">
-          <img src={placeholder} alt="placeholder" width="100" height="100" />
+          <img src={placeholder} alt="placeholder" width="80" height="80" />
         </div>
         <div id="text">
           <p id="subject">{character}</p>
           <p id="description">{dialogue}</p>
         </div>
       </div>
+
+      <div class="download">
+        <button>Download</button>
+      </div>
+
       <Footer />
     </div>
   );
