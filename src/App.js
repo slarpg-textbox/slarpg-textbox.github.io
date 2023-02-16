@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import allison_icon from "./assets/faces/allison/tile001.png";
-import claire_icon from "./assets/faces/claire/tile001.png";
-import jodie_icon from "./assets/faces/jodie/tile001.png";
-import melody_icon from "./assets/faces/melody/tile001.png";
-import javis_icon from "./assets/faces/javis/tile001.png";
+import allison_icon from "./assets/faces/allison/tile000.png";
+import beverly_icon from "./assets/faces/beverly/tile000.png";
+import claire_icon from "./assets/faces/claire/tile000.png";
+import faith_icon from "./assets/faces/faith/tile000.png";
+import harmony_icon from "./assets/faces/harmony/tile003.png";
+import javis_icon from "./assets/faces/javis/tile000.png";
+import jodie_icon from "./assets/faces/jodie/tile000.png";
+import melody_icon from "./assets/faces/melody/tile000.png";
+import paula_icon from "./assets/faces/paula/tile000.png";
+import verena_icon from "./assets/faces/verena/tile000.png";
+import zinnia_icon from "./assets/faces/zinnia/tile000.png";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
 
@@ -13,22 +19,6 @@ const handleCaptureClick = async () => {
   const canvas = await html2canvas(document.querySelector(".container"));
   const dataURL = canvas.toDataURL("image/png");
   downloadjs(dataURL, "download.png", "image/png");
-};
-
-const Footer = () => {
-  return (
-    <div class="footer">
-      <p>
-        View the code/contribute here:{" "}
-        <a
-          href="https://github.com/slarpg-textbox/slarpg-textbox.github.io"
-          target="_blank"
-        >
-          https://github.com/slarpg-textbox/slarpg-textbox.github.io
-        </a>
-      </p>
-    </div>
-  );
 };
 
 const App = () => {
@@ -67,6 +57,30 @@ const App = () => {
       </div>
       <div class="input">
         <div>
+          <span>Face:</span>
+          <br />
+          <select value={face} onChange={handleFace}>
+            <optgroup label="Main Characters">
+              <option value={melody_icon}>Melody</option>
+              <option value={allison_icon}>Allison</option>
+              <option value={claire_icon}>Claire</option>
+              <option value={jodie_icon}>Jodie</option>
+            </optgroup>
+            <optgroup label="Enemies">
+              <option value={javis_icon}>Javis</option>
+              <option value={verena_icon}>Verena</option>
+              <option value={paula_icon}>Paula</option>
+              <option value={harmony_icon}>Harmony</option>
+            </optgroup>
+            <optgroup label="NPCs">
+              <option value={zinnia_icon}>Zinnia</option>
+              <option value={faith_icon}>Faith</option>
+              <option value={beverly_icon}>Beverly</option>
+              <option value={paula_icon}>Paula</option>
+            </optgroup>
+          </select>
+        </div>
+        <div>
           <span>Character:</span>
           <br />
           <input type="text" value={character} onChange={handleTextCharacter} />
@@ -75,17 +89,6 @@ const App = () => {
           <span>Dialogue:</span>
           <br />
           <textarea value={dialogue} onChange={handleTextDialogue}></textarea>
-        </div>
-        <div>
-          <span>Face:</span>
-          <br />
-          <select value={face} onChange={handleFace}>
-            <option value={melody_icon}>Melody</option>
-            <option value={allison_icon}>Allison</option>
-            <option value={claire_icon}>Claire</option>
-            <option value={jodie_icon}>Jodie</option>
-            <option value={javis_icon}>Javis</option>
-          </select>
         </div>
         <div class="dialogue-style">
           <span>Dialogue size: (🚧)</span>
@@ -144,7 +147,17 @@ const App = () => {
         </a>
       </div>
 
-      <Footer />
+      <footer>
+        <p>
+          View the code/contribute here:{" "}
+          <a
+            href="https://github.com/slarpg-textbox/slarpg-textbox.github.io"
+            target="_blank"
+          >
+            https://github.com/slarpg-textbox/slarpg-textbox.github.io
+          </a>
+        </p>
+      </footer>
     </div>
   );
 };

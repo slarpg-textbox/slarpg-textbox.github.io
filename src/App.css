@@ -3,6 +3,7 @@
   src: url(assets/fonts/chinacat.ttf);
 }
 
+/* select both div and footer */
 div {
   margin: 10px 5px;
 }
@@ -53,6 +54,10 @@ div {
 } */
 #description {
   color: white;
+}
+
+.download {
+  min-height: 45vh;
 }
 
 .footer {
