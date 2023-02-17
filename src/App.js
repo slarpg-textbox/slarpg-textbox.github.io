@@ -27,7 +27,7 @@ const App = () => {
   }, []);
 
   const [character, setTextCharacter] = useState("Melody");
-  const [dialogue, setTextDialogue] = useState("Hello World!");
+  const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueSize, setDialogueSize] = useState("12px");
   const [dialogueColor, setDialogueColor] = useState("white");
   // face should useState of the melody_icon image that is imported
@@ -48,6 +48,8 @@ const App = () => {
   const handleFace = (event) => {
     console.log(event.target.value);
     setFace(event.target.value);
+    // set the text character to the name of the face that's stored between the <option></option> tags
+    // setTextCharacter(event.target.value);
   };
 
   return (
@@ -133,7 +135,7 @@ const App = () => {
 
       <div class="container">
         <div id="image">
-          <img src={face} alt="placeholder" width="95" height="95" />
+          <img src={face} alt="placeholder" width="85" height="85" />
         </div>
         <div id="text">
           <p id="subject">{character}</p>
