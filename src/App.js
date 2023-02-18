@@ -13,12 +13,31 @@ import verena_icon from "./assets/faces/verena/tile000.png";
 import zinnia_icon from "./assets/faces/zinnia/tile000.png";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 
 const handleCaptureClick = async () => {
   // canvas should html2canvas of the container div
-  const canvas = await html2canvas(document.querySelector(".output"));
-  const dataURL = canvas.toDataURL("image/png");
-  downloadjs(dataURL, "download.png", "image/png");
+  // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
+  // To overcome this, I'll just combine the textbox and border into one image
+  const canvas = await html2canvas(document.querySelector(".output"), {
+    allowTaint: true,
+    useCORS: true,
+  }).then((canvas) => {
+    return canvas;
+  });
+  // downloadjs should download the canvas as a png
+  downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
+};
+
+const handleDownloadClick = () => {
+  // backup in case I decide to use border-image again
+  domtoimage
+    .toPng(document.querySelector(".output"), {
+      // manually increase the bottom size to account for the border-image
+    })
+    .then(function (dataUrl) {
+      downloadjs(dataUrl, "textbox.png", "image/png");
+    });
 };
 
 const App = () => {
@@ -56,7 +75,9 @@ const App = () => {
       </div>
       <div class="input">
         <div>
-          <span>Face</span>
+          <b>
+            <span>Face:</span>
+          </b>
           <br />
           <select value={face} onChange={handleFace}>
             <optgroup label="Main Characters">
@@ -81,7 +102,9 @@ const App = () => {
         </div>
 
         <div>
-          <span>Character</span>
+          <b>
+            <span>Character:</span>
+          </b>
           <br />
           <input type="text" value={character} onChange={handleTextCharacter} />
           <br />
@@ -92,9 +115,10 @@ const App = () => {
             onChange={handleCharacterColor}
           ></input>
         </div>
-
         <div>
-          <span>Dialogue:</span>
+          <b>
+            <span>Dialogue:</span>
+          </b>
           <br />
           <textarea value={dialogue} onChange={handleTextDialogue}></textarea>
           <br />
@@ -122,7 +146,6 @@ const App = () => {
           </form>
         </div>
       </div>
-
       <div class="output">
         <div id="image">
           <img src={face} alt="placeholder" width="85" height="85" />
