@@ -16,7 +16,7 @@ import html2canvas from "html2canvas";
 
 const handleCaptureClick = async () => {
   // canvas should html2canvas of the container div
-  const canvas = await html2canvas(document.querySelector(".container"));
+  const canvas = await html2canvas(document.querySelector(".output"));
   const dataURL = canvas.toDataURL("image/png");
   downloadjs(dataURL, "download.png", "image/png");
 };
@@ -27,29 +27,30 @@ const App = () => {
   }, []);
 
   const [character, setTextCharacter] = useState("Melody");
+  const [characterColor, setCharacterColor] = useState("#fef08a");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
-  const [dialogueSize, setDialogueSize] = useState("12px");
-  const [dialogueColor, setDialogueColor] = useState("white");
+  const [dialogueColor, setDialogueColor] = useState("#ffffff");
+  const [dialogueSize, setDialogueSize] = useState("16px");
   // face should useState of the melody_icon image that is imported
   const [face, setFace] = useState(melody_icon);
 
   const handleTextCharacter = (event) => {
     setTextCharacter(event.target.value);
   };
+  const handleCharacterColor = (event) => {
+    setCharacterColor(event.target.value);
+  };
   const handleTextDialogue = (event) => {
     setTextDialogue(event.target.value);
-  };
-  const handleDialogueSize = (event) => {
-    setDialogueSize(event.target.value);
   };
   const handleDialogueColor = (event) => {
     setDialogueColor(event.target.value);
   };
+  const handleDialogueSize = (event) => {
+    setDialogueSize(event.target.value);
+  };
   const handleFace = (event) => {
-    console.log(event.target.value);
     setFace(event.target.value);
-    // set the text character to the name of the face that's stored between the <option></option> tags
-    // setTextCharacter(event.target.value);
   };
 
   return (
@@ -59,7 +60,7 @@ const App = () => {
       </div>
       <div class="input">
         <div>
-          <span>Face:</span>
+          <span>Face</span>
           <br />
           <select value={face} onChange={handleFace}>
             <optgroup label="Main Characters">
@@ -82,27 +83,39 @@ const App = () => {
             </optgroup>
           </select>
         </div>
+
         <div>
-          <span>Character:</span>
+          <span>Character</span>
           <br />
           <input type="text" value={character} onChange={handleTextCharacter} />
+          <br />
+          <input
+            type="color"
+            value={characterColor}
+            name="character-color"
+            onChange={handleCharacterColor}
+          ></input>
         </div>
+
         <div>
           <span>Dialogue:</span>
           <br />
           <textarea value={dialogue} onChange={handleTextDialogue}></textarea>
-        </div>
-        <div class="dialogue-style">
-          <span>Dialogue size: (🚧)</span>
           <br />
+          <input
+            type="color"
+            value={dialogueColor}
+            name="dialogue-color"
+            onChange={handleDialogueColor}
+          ></input>
           <form onChange={handleDialogueSize}>
             <input
               type="radio"
-              value="12px"
+              value="16px"
               name="dialogue-size"
-              checked={dialogueSize === "12px"}
+              checked={dialogueSize === "16px"}
             />
-            <label for="12px">12px</label>
+            <label for="16px">16px</label>
             <input
               type="radio"
               value="22px"
@@ -112,34 +125,24 @@ const App = () => {
             <label for="22px">22px</label>
           </form>
         </div>
-        <div class="dialogue-style">
-          <span>Dialogue color: (🚧)</span>
-          <form onChange={handleDialogueColor}>
-            <input
-              type="radio"
-              value="white"
-              name="dialogue-color"
-              checked={dialogueColor === "white"}
-            />
-            <label for="white">White</label>
-            <input
-              type="radio"
-              value="rainbow"
-              name="dialogue-color"
-              checked={dialogueColor === "rainbow"}
-            />
-            <label for="rainbow">Rainbow</label>
-          </form>
-        </div>
       </div>
 
-      <div class="container">
+      <div class="output">
         <div id="image">
           <img src={face} alt="placeholder" width="85" height="85" />
         </div>
         <div id="text">
-          <p id="subject">{character}</p>
-          <p id="description">{dialogue}</p>
+          {/* set font color to be characterColor */}
+          <p id="subject" style={{ color: characterColor }}>
+            {character}
+          </p>
+          {/* style with font-size dialoguesize */}
+          <p
+            id="description"
+            style={{ color: dialogueColor, fontSize: dialogueSize }}
+          >
+            {dialogue}
+          </p>
         </div>
       </div>
 
