@@ -22,10 +22,6 @@ const handleCaptureClick = async () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    document.title = "SLARPG Textbox Generator";
-  }, []);
-
   const [character, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");

@@ -15,8 +15,8 @@ div {
   background-size: contain;
   background-color: rgb(51, 51, 51); /* in case the image isn't loaded */
   /* background-size: 550px 105px; */
-  /* border: 15px solid transparent; */
-  border-image: url(assets/window/tile001_clear.png) 15 stretch;
+  /* border: 10px solid pink; */
+  /* border-image: url(assets/window/tile001_clear.png) 15 stretch; */
   width: 550px;
   height: 105px;
   display: flex;
@@ -46,6 +46,7 @@ div {
 }
 #text p {
   margin: 0;
+  white-space: pre-wrap;
 }
 /* .dialogue-style {
   display: inline-block;
