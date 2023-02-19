@@ -181,6 +181,16 @@ const App = () => {
             https://github.com/slarpg-textbox/slarpg-textbox.github.io
           </a>
         </p>
+        <small>
+          Sprites belong to the{" "}
+          <a href="https://slarpg.com/" target="_blank">
+            Super Lesbian Animal RPG
+          </a>{" "}
+          game and received permission to use from{" "}
+          <a href="https://ponett.tumblr.com/" target="_blank">
+            ponett
+          </a>
+        </small>
       </footer>
     </div>
   );
