@@ -121,7 +121,7 @@ const App = () => {
             <input
               type="file"
               name="upload"
-              accept=".jpg, .jpeg, .png"
+              accept=".jpg, .jpeg, .png, .webp, .gif, .svg"
             ></input>{" "}
           </form>
         </div>
