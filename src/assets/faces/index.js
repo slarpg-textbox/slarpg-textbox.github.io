@@ -4,7 +4,7 @@ import claire from "./main_characters/claire/tile000.png";
 import jodie from "./main_characters/jodie/tile000.png";
 import melody from "./main_characters//melody/tile000.png";
 // Enemies
-import harmony from "./enemies/harmony/tile000.png";
+import harmony from "./enemies/harmony/tile003.png";
 import javis from "./enemies/javis/neutral.png";
 import paula from "./enemies/paula/tile000.png";
 import bigby from "./enemies/sons/tile000.png";
