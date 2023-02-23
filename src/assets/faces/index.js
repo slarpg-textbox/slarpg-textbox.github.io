@@ -18,7 +18,7 @@ import bartholomew from "./npc/bartholomew/tile014.png";
 import beverly from "./npc/beverly/tile000.png";
 import bill from "./npc/bill/tile000.png";
 import catherine from "./npc/catherine/tile013.png";
-import faith from "./faith/tile000.png";
+import faith from "./npc/faith/tile000.png";
 import fortune_teller from "./npc/fortune_teller/tile010.png";
 import glyph from "./npc/glyph/tile000.png";
 import holly from "./npc/holly/tile000.png";
