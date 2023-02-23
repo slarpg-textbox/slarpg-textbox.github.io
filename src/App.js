@@ -89,15 +89,29 @@ const App = () => {
             </optgroup>
             <optgroup label="Enemies">
               <option value={icons.javis}>Javis</option>
+              <option value={icons.clintson}>Clintson</option>
+              <option value={icons.bigby}>Bigby</option>
+              <option value={icons.killer_ray}>Killer Ray</option>
+              <option value={icons.roy}>Roy</option>
               <option value={icons.verena}>Verena</option>
               <option value={icons.paula}>Paula</option>
               <option value={icons.harmony}>Harmony</option>
             </optgroup>
             <optgroup label="NPCs">
-              <option value={icons.zinnia}>Zinnia</option>
+              <option value={icons.amelia}>Amelia</option>
+              <option value={icons.bartholomew}>Bartholomew</option>
+              <option value={icons.bill}>Bill</option>
+              <option value={icons.catherine}>Catherine</option>
               <option value={icons.faith}>Faith</option>
-              <option value={icons.beverly}>Beverly</option>
-              <option value={icons.paula}>Paula</option>
+              <option value={icons.fortune_teller}>Fortune Teller</option>
+              <option value={icons.glyph}>Glyph</option>
+              <option value={icons.holly}>Holly</option>
+              <option value={icons.ipsy}>Ipsy</option>
+              <option value={icons.mona}>Mona</option>
+              <option value={icons.nef}>Nef</option>
+              <option value={icons.pepper}>Pepper</option>
+              <option value={icons.shadow}>Shadow</option>
+              <option value={icons.zinnia}>Zinnia</option>
             </optgroup>
           </select>
           <br />
