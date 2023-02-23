@@ -1,16 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import allison_icon from "./assets/faces/allison/tile000.png";
-import beverly_icon from "./assets/faces/beverly/tile000.png";
-import claire_icon from "./assets/faces/claire/tile000.png";
-import faith_icon from "./assets/faces/faith/tile000.png";
-import harmony_icon from "./assets/faces/harmony/tile003.png";
-import javis_icon from "./assets/faces/javis/tile000.png";
-import jodie_icon from "./assets/faces/jodie/tile000.png";
-import melody_icon from "./assets/faces/melody/tile000.png";
-import paula_icon from "./assets/faces/paula/tile000.png";
-import verena_icon from "./assets/faces/verena/tile000.png";
-import zinnia_icon from "./assets/faces/zinnia/tile000.png";
+import * as icons from "./assets/faces";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
 import domtoimage from "dom-to-image";
@@ -47,7 +37,7 @@ const App = () => {
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("16px");
   // face should useState of the melody_icon image that is imported
-  const [face, setFace] = useState(melody_icon);
+  const [face, setFace] = useState(icons.melody);
 
   const handleTextCharacter = (event) => {
     setTextCharacter(event.target.value);
@@ -65,7 +55,18 @@ const App = () => {
     setDialogueSize(event.target.value);
   };
   const handleFace = (event) => {
-    setFace(event.target.value);
+    // add option to see if the input with the name="upload" has a value
+    // if it does, then setFace to the value of the input using filereader
+    // else, setFace to the value of the select
+    if (event.target.name === "upload") {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setFace(e.target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      setFace(event.target.value);
+    }
   };
 
   return (
@@ -81,24 +82,34 @@ const App = () => {
           <br />
           <select value={face} onChange={handleFace}>
             <optgroup label="Main Characters">
-              <option value={melody_icon}>Melody</option>
-              <option value={allison_icon}>Allison</option>
-              <option value={claire_icon}>Claire</option>
-              <option value={jodie_icon}>Jodie</option>
+              <option value={icons.melody}>Melody</option>
+              <option value={icons.allison}>Allison</option>
+              <option value={icons.claire}>Claire</option>
+              <option value={icons.jodie}>Jodie</option>
             </optgroup>
             <optgroup label="Enemies">
-              <option value={javis_icon}>Javis</option>
-              <option value={verena_icon}>Verena</option>
-              <option value={paula_icon}>Paula</option>
-              <option value={harmony_icon}>Harmony</option>
+              <option value={icons.javis}>Javis</option>
+              <option value={icons.verena}>Verena</option>
+              <option value={icons.paula}>Paula</option>
+              <option value={icons.harmony}>Harmony</option>
             </optgroup>
             <optgroup label="NPCs">
-              <option value={zinnia_icon}>Zinnia</option>
-              <option value={faith_icon}>Faith</option>
-              <option value={beverly_icon}>Beverly</option>
-              <option value={paula_icon}>Paula</option>
+              <option value={icons.zinnia}>Zinnia</option>
+              <option value={icons.faith}>Faith</option>
+              <option value={icons.beverly}>Beverly</option>
+              <option value={icons.paula}>Paula</option>
             </optgroup>
           </select>
+          <br />
+          {/* THe form should read the image and pass it to the handleFace function */}
+          <form onChange={handleFace}>
+            <span>Or choose your own:{"  "}</span>
+            <input
+              type="file"
+              name="upload"
+              accept=".jpg, .jpeg, .png"
+            ></input>{" "}
+          </form>
         </div>
 
         <div>
