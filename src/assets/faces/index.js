@@ -26,7 +26,7 @@ import ipsy from "./npc/ipsy/tile012.png";
 import mona from "./npc/mona/tile006.png";
 import nef from "./npc/nef/tile005.png";
 import pepper from "./npc/pepper/tile012.png";
-import shadow from "./npc/shadow/shadow.png";
+import shadow from "./npc/shadow/shadow_open.webp";
 import zinnia from "./npc/zinnia/tile000.png";
 
 export {
