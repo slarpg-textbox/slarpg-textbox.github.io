@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SLARPG generator",
+  "name": "SLARPG textbox generator",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,12 +10,12 @@
     {
       "src": "favicon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "96x97"
     },
     {
       "src": "favicon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "96x97"
     }
   ],
   "start_url": ".",
