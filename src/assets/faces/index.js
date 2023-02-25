@@ -11,7 +11,7 @@ import bigby from "./enemies/sons/tile000.png";
 import clintson from "./enemies/sons/tile006.png";
 import killer_ray from "./enemies/sons/tile003.png";
 import roy from "./enemies/sons/tile009.png";
-import verena from "./enemies/verena/tile000.png";
+import verena from "./enemies/verena/tile001.png";
 // NPCs
 import amelia from "./npc/amelia/tile016.png";
 import bartholomew from "./npc/bartholomew/tile014.png";
