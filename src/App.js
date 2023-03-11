@@ -10,6 +10,7 @@ const handleCaptureClick = async () => {
   // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
   // To overcome this, I'll just combine the textbox and border into one image
   const canvas = await html2canvas(document.querySelector(".output"), {
+    backgroundColor: null,
     allowTaint: true,
     useCORS: true,
   }).then((canvas) => {
