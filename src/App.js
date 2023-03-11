@@ -3,7 +3,6 @@ import "./App.css";
 import * as icons from "./assets/faces";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
-import domtoimage from "dom-to-image";
 
 const handleCaptureClick = async () => {
   // canvas should html2canvas of the container div
@@ -21,25 +20,15 @@ const handleCaptureClick = async () => {
   downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
 };
 
-const handleDownloadClick = () => {
-  // backup in case I decide to use border-image again
-  domtoimage
-    .toPng(document.querySelector(".output"), {
-      // manually increase the bottom size to account for the border-image
-    })
-    .then(function (dataUrl) {
-      downloadjs(dataUrl, "textbox.png", "image/png");
-    });
-};
-
 const App = () => {
+  // face should useState of the melody_icon image that is imported
+  const [face, setFace] = useState(icons.melody);
   const [character, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("16px");
-  // face should useState of the melody_icon image that is imported
-  const [face, setFace] = useState(icons.melody);
+  const [heart, setHeart] = useState("heart");
 
   const handleTextCharacter = (event) => {
     setTextCharacter(event.target.value);
@@ -70,11 +59,14 @@ const App = () => {
       setFace(event.target.value);
     }
   };
+  const handleHeart = (event) => {
+    setHeart(event.target.value);
+  };
 
   return (
-    <div>
+    <div class="outer">
       <div class="header">
-        <h1>SLARPG Textbox Generator</h1>
+        <h1>SLARPG Fake Quotes Generator</h1>
       </div>
       <div class="input">
         <div>
@@ -119,7 +111,7 @@ const App = () => {
           <br />
           {/* THe form should read the image and pass it to the handleFace function */}
           <form onChange={handleFace}>
-            <span>Or choose your own:{"  "}</span>
+            <span>Custom face:{"  "}</span>
             <input
               type="file"
               name="upload"
@@ -147,7 +139,12 @@ const App = () => {
             <span>Dialogue:</span>
           </b>
           <br />
-          <textarea value={dialogue} onChange={handleTextDialogue}></textarea>
+          <textarea
+            value={dialogue}
+            onChange={handleTextDialogue}
+            rows="3"
+            cols="50"
+          ></textarea>
           <br />
           <input
             type="color"
@@ -156,6 +153,7 @@ const App = () => {
             onChange={handleDialogueColor}
           ></input>
           <form onChange={handleDialogueSize}>
+            <span>Font size: </span>
             <input
               type="radio"
               value="16px"
@@ -165,15 +163,33 @@ const App = () => {
             <label for="16px">16px</label>
             <input
               type="radio"
-              value="22px"
+              value="24px"
               name="dialogue-size"
-              checked={dialogueSize === "22px"}
+              checked={dialogueSize === "24px"}
             />
-            <label for="22px">22px</label>
+            <label for="24px">24px</label>
+          </form>
+          <form onChange={handleHeart}>
+            <span>Heart ❤️: </span>
+            <input
+              type="radio"
+              value="no-heart"
+              name="heart-switch"
+              checked={heart === "no-heart"}
+            />
+            <label for="no-heart">No</label>
+            <input
+              type="radio"
+              value="heart"
+              name="heart-switch"
+              checked={heart === "heart"}
+            />
+            <label for="heart">Yes</label>
           </form>
         </div>
       </div>
-      <div class="output">
+
+      <div class={`output ${heart}`}>
         <div id="image">
           <img src={face} alt="placeholder" width="85" height="85" />
         </div>
@@ -213,7 +229,7 @@ const App = () => {
           <a href="https://slarpg.com/" target="_blank">
             Super Lesbian Animal RPG
           </a>{" "}
-          game and received permission to use from{" "}
+          game and received permission to use and host from{" "}
           <a href="https://ponett.tumblr.com/" target="_blank">
             ponett
           </a>
