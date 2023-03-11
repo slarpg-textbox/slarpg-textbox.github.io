@@ -11,6 +11,7 @@ const handleCaptureClick = async () => {
   // To overcome this, I'll just combine the textbox and border into one image
   const canvas = await html2canvas(document.querySelector(".output"), {
     backgroundColor: null,
+    scale: 2,
     allowTaint: true,
     useCORS: true,
   }).then((canvas) => {
