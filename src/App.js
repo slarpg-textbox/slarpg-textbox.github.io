@@ -39,7 +39,7 @@ const App = () => {
   const [transparency, setTransparency] = useState("transparent");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
-  const [dialogueSize, setDialogueSize] = useState("16");
+  const [dialogueSize, setDialogueSize] = useState("18");
   const [heart, setHeart] = useState("heart");
 
   const handleTextCharacter = (event) => setTextCharacter(event.target.value);
@@ -208,8 +208,8 @@ const App = () => {
             {/* add range input */}
             <input
               type="range"
-              min="16"
-              max="45"
+              min="18"
+              max="50"
               value={dialogueSize}
               name="dialogue-size"
               onChange={handleDialogueSize}
@@ -238,7 +238,7 @@ const App = () => {
 
       <div className={`output ${heart} ${transparency}`}>
         <div id="image">
-          <img src={face} alt="no image" width="85" height="85" />
+          <img src={face} alt="no image" width="96" height="96" />
         </div>
         <div id="text">
           {/* set font color to be characterColor */}
