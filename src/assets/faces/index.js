@@ -1,60 +1,50 @@
 // Main Characters
-import allison from "./main_characters/allison/happy.png";
-import claire from "./main_characters/claire/tile000.png";
-import jodie from "./main_characters/jodie/tile000.png";
-import melody from "./main_characters//melody/tile000.png";
+import * as allison from "./allison/";
+import * as melody from "./melody/";
+import * as claire from "./claire/";
+import * as jodie from "./jodie/";
+
 // Enemies
-import harmony from "./enemies/harmony/tile003.png";
-import javis from "./enemies/javis/neutral.png";
-import paula from "./enemies/paula/tile000.png";
-import bigby from "./enemies/sons/tile000.png";
-import clintson from "./enemies/sons/tile006.png";
-import killer_ray from "./enemies/sons/tile003.png";
-import roy from "./enemies/sons/tile009.png";
-import verena from "./enemies/verena/tile001.png";
+import * as javis from "./javis";
+import * as sons from "./sons";
+import * as verena from "./verena";
+import * as paula from "./paula";
+import * as harmony from "./harmony";
+
 // NPCs
-import amelia from "./npc/amelia/tile016.png";
-import bartholomew from "./npc/bartholomew/tile014.png";
-import beverly from "./npc/beverly/tile000.png";
-import bill from "./npc/bill/tile000.png";
-import catherine from "./npc/catherine/tile013.png";
-import faith from "./npc/faith/tile000.png";
-import fortune_teller from "./npc/fortune_teller/tile010.png";
-import glyph from "./npc/glyph/tile000.png";
-import holly from "./npc/holly/tile000.png";
-import ipsy from "./npc/ipsy/tile012.png";
-import mona from "./npc/mona/tile006.png";
-import nef from "./npc/nef/tile005.png";
-import pepper from "./npc/pepper/tile012.png";
-import shadow from "./npc/shadow/shadow_open.webp";
-import zinnia from "./npc/zinnia/tile000.png";
+import * as amelia from "./amelia";
+import * as beverly from "./beverly";
+import * as faith from "./faith";
+import * as glyph from "./glyph";
+import * as ipsy from "./ipsy";
+import * as nef from "./nef";
+import * as noel from "./noel";
+import * as npc_desert from "./npc_desert";
+import * as npc_greenridge from "./npc_greenridge";
+import * as npc_woods from "./npc_woods";
+import * as slhrpg from "./slhrpg";
+import * as zinnia from "./zinnia";
 
 export {
   allison,
+  melody,
+  javis,
   claire,
   jodie,
-  melody,
-  harmony,
-  javis,
-  paula,
-  bigby,
-  clintson,
-  killer_ray,
-  roy,
+  sons,
   verena,
+  paula,
+  harmony,
   amelia,
-  bartholomew,
   beverly,
-  bill,
-  catherine,
   faith,
-  fortune_teller,
   glyph,
-  holly,
   ipsy,
-  mona,
   nef,
-  pepper,
-  shadow,
+  noel,
+  npc_desert,
+  npc_greenridge,
+  npc_woods,
+  slhrpg,
   zinnia,
 };

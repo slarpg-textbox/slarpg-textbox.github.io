@@ -13,42 +13,59 @@ const handleCaptureClick = async () => {
     scale: 2,
     allowTaint: true,
     useCORS: true,
+    // download as 320x60 x2 due to scale
+    // width: 640,
+    // height: 120,
   }).then((canvas) => {
     return canvas;
   });
+
   // downloadjs should download the canvas as a png
   downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
 };
 
 const App = () => {
   // face should useState of the melody_icon image that is imported
-  const [face, setFace] = useState(icons.melody);
-  const [character, setTextCharacter] = useState("Melody");
+  const [character, setCharacter] = useState("melody");
+  // use melody's expressions as the default to load the expressions
+  const [expressions, setExpressions] = useState(
+    Object.entries(require(`./assets/faces/melody/index.js`))
+  );
+  // const [selectedExpression, setSelectedExpression] = useState();
+  const [face, setFace] = useState(icons.melody._default);
+
+  const [characterName, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
+  const [transparency, setTransparency] = useState("transparent");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
-  const [dialogueSize, setDialogueSize] = useState("16px");
+  const [dialogueSize, setDialogueSize] = useState("16");
   const [heart, setHeart] = useState("heart");
 
-  const handleTextCharacter = (event) => {
-    setTextCharacter(event.target.value);
+  const handleTextCharacter = (event) => setTextCharacter(event.target.value);
+  const handleCharacterColor = (event) => setCharacterColor(event.target.value);
+  const handleTransparency = (event) => setTransparency(event.target.value);
+  const handleTextDialogue = (event) => setTextDialogue(event.target.value);
+  const handleDialogueColor = (event) => setDialogueColor(event.target.value);
+  const handleDialogueSize = (event) => setDialogueSize(event.target.value);
+  // Event handler for when a character is selected
+  const handleCharacterChange = (event) => {
+    const character = event.target.value;
+    setCharacter(character);
+
+    // Load all the expressions for the selected character
+    const expressions = require(`./assets/faces/${character}/index.js`);
+    console.log(expressions);
+    setExpressions(Object.entries(expressions));
+    handleFace({ target: { value: expressions._default } });
+    // setSelectedExpression("");
+    // setFace(expressions[Object.entries(expressions)[0][0]]);
   };
-  const handleCharacterColor = (event) => {
-    setCharacterColor(event.target.value);
-  };
-  const handleTextDialogue = (event) => {
-    setTextDialogue(event.target.value);
-  };
-  const handleDialogueColor = (event) => {
-    setDialogueColor(event.target.value);
-  };
-  const handleDialogueSize = (event) => {
-    setDialogueSize(event.target.value);
-  };
+
   const handleFace = (event) => {
-    // add option to see if the input with the name="upload" has a value
-    // if it does, then setFace to the value of the input using filereader
-    // else, setFace to the value of the select
+    // const expression = event.target.value;
+    // setSelectedExpression(expression);
+
     if (event.target.name === "upload") {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -59,55 +76,68 @@ const App = () => {
       setFace(event.target.value);
     }
   };
+
   const handleHeart = (event) => {
     setHeart(event.target.value);
   };
 
   return (
-    <div class="outer">
-      <div class="header">
+    <div className="outer">
+      <div className="header">
         <h1>SLARPG Fake Quotes Generator</h1>
       </div>
-      <div class="input">
+      <div className="input">
         <div>
           <b>
             <span>Face:</span>
           </b>
           <br />
-          <select value={face} onChange={handleFace}>
+          {/* <select value={face} onChange={handleFace}> */}
+          <select value={character} onChange={handleCharacterChange}>
             <optgroup label="Main Characters">
-              <option value={icons.melody}>Melody</option>
-              <option value={icons.allison}>Allison</option>
-              <option value={icons.claire}>Claire</option>
-              <option value={icons.jodie}>Jodie</option>
+              <option value="melody">Melody</option>
+              <option value="allison">Allison</option>
+              <option value="claire">Claire</option>
+              <option value="jodie">Jodie</option>
             </optgroup>
             <optgroup label="Enemies">
-              <option value={icons.javis}>Javis</option>
-              <option value={icons.clintson}>Clintson</option>
-              <option value={icons.bigby}>Bigby</option>
-              <option value={icons.killer_ray}>Killer Ray</option>
-              <option value={icons.roy}>Roy</option>
-              <option value={icons.verena}>Verena</option>
-              <option value={icons.paula}>Paula</option>
-              <option value={icons.harmony}>Harmony</option>
+              <option value="javis">Javis</option>
+              <option value="sons">Sons</option>
+              <option value="verena">Verena</option>
+              <option value="paula">Paula</option>
+              <option value="harmony">Harmony</option>
             </optgroup>
             <optgroup label="NPCs">
-              <option value={icons.amelia}>Amelia</option>
-              <option value={icons.bartholomew}>Bartholomew</option>
-              <option value={icons.bill}>Bill</option>
-              <option value={icons.catherine}>Catherine</option>
-              <option value={icons.faith}>Faith</option>
-              <option value={icons.fortune_teller}>Fortune Teller</option>
-              <option value={icons.glyph}>Glyph</option>
-              <option value={icons.holly}>Holly</option>
-              <option value={icons.ipsy}>Ipsy</option>
-              <option value={icons.mona}>Mona</option>
-              <option value={icons.nef}>Nef</option>
-              <option value={icons.pepper}>Pepper</option>
-              <option value={icons.shadow}>Shadow</option>
-              <option value={icons.zinnia}>Zinnia</option>
+              <option value="amelia">Amelia</option>
+              <option value="beverly">Beverly</option>
+              <option value="faith">Faith</option>
+              <option value="glyph">Glyph</option>
+              <option value="ipsy">Ipsy</option>
+              <option value="nef">Nef</option>
+              <option value="noel">Noel</option>
+              <option value="npc_desert">NPCs Desert</option>
+              <option value="npc_greenridge">NPCs Greenridge</option>
+              <option value="npc_woods">NPCs Woods</option>
+              <option value="slhrpg">SLHRPG</option>
+              <option value="zinnia">Zinnia</option>
             </optgroup>
           </select>
+
+          <br />
+          <b>
+            <span>Expression:</span>
+          </b>
+          <br />
+          {/* Load all options into the select based on icons.character.emotion */}
+          <select value={face} onChange={handleFace} disabled={!character}>
+            {/* <option value="">Select an expression</option> */}
+            {expressions.map(([expression, imageUrl]) => (
+              <option key={expression} value={imageUrl}>
+                {expression}
+              </option>
+            ))}
+          </select>
+
           <br />
           {/* THe form should read the image and pass it to the handleFace function */}
           <form onChange={handleFace}>
@@ -125,7 +155,11 @@ const App = () => {
             <span>Character:</span>
           </b>
           <br />
-          <input type="text" value={character} onChange={handleTextCharacter} />
+          <input
+            type="text"
+            value={characterName}
+            onChange={handleTextCharacter}
+          />
           <br />
           <input
             type="color"
@@ -152,22 +186,35 @@ const App = () => {
             name="dialogue-color"
             onChange={handleDialogueColor}
           ></input>
+          <form onChange={handleTransparency}>
+            <span>Transparency ⬜️:</span>
+            <input
+              type="radio"
+              value="no-transparent"
+              name="transparency-switch"
+              checked={transparency === "no-transparent"}
+            />
+            <label htmlFor="no-heart">No</label>
+            <input
+              type="radio"
+              value="transparent"
+              name="transparency-switch"
+              checked={transparency === "transparent"}
+            />
+            <label htmlFor="transparency-switch">Yes</label>
+          </form>
           <form onChange={handleDialogueSize}>
             <span>Font size: </span>
+            {/* add range input */}
             <input
-              type="radio"
-              value="16px"
+              type="range"
+              min="16"
+              max="45"
+              value={dialogueSize}
               name="dialogue-size"
-              checked={dialogueSize === "16px"}
-            />
-            <label for="16px">16px</label>
-            <input
-              type="radio"
-              value="24px"
-              name="dialogue-size"
-              checked={dialogueSize === "24px"}
-            />
-            <label for="24px">24px</label>
+              onChange={handleDialogueSize}
+            />{" "}
+            {dialogueSize}px
           </form>
           <form onChange={handleHeart}>
             <span>Heart ❤️: </span>
@@ -177,38 +224,38 @@ const App = () => {
               name="heart-switch"
               checked={heart === "no-heart"}
             />
-            <label for="no-heart">No</label>
+            <label htmlFor="no-heart">No</label>
             <input
               type="radio"
               value="heart"
               name="heart-switch"
               checked={heart === "heart"}
             />
-            <label for="heart">Yes</label>
+            <label htmlFor="heart">Yes</label>
           </form>
         </div>
       </div>
 
-      <div class={`output ${heart}`}>
+      <div className={`output ${heart} ${transparency}`}>
         <div id="image">
-          <img src={face} alt="placeholder" width="85" height="85" />
+          <img src={face} alt="no image" width="85" height="85" />
         </div>
         <div id="text">
           {/* set font color to be characterColor */}
           <p id="subject" style={{ color: characterColor }}>
-            {character}
+            {characterName}
           </p>
           {/* style with font-size dialoguesize */}
           <p
             id="description"
-            style={{ color: dialogueColor, fontSize: dialogueSize }}
+            style={{ color: dialogueColor, fontSize: dialogueSize + "px" }}
           >
             {dialogue}
           </p>
         </div>
       </div>
 
-      <div class="download">
+      <div className="download">
         <a href="#" onClick={handleCaptureClick}>
           <button>Download</button>
         </a>
