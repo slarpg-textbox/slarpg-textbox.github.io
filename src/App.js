@@ -18,7 +18,7 @@ const App = () => {
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("18");
   const [heart, setHeart] = useState("heart");
-  const [transparency, setTransparency] = useState("transparent");
+  const [transparency, setTransparency] = useState("no-transparent");
   const [scaleSize, setScale] = useState("2");
 
   const handleTextCharacter = (event) => setTextCharacter(event.target.value);
