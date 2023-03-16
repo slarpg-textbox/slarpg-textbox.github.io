@@ -13,16 +13,16 @@ import beach_neutral from "./beach_neutral.png";
 import beach_shocked from "./beach_shocked.png";
 import beach_surprised_happy from "./beach_surprised_happy.png";
 import beach_surprised_raised from "./beach_surprised_raised.png";
-import beach_sus_side_smile from "./beach_sus_side_smile.png";
+import beach_smug_side from "./beach_smug_side.png";
 import beach_sus_side from "./beach_sus_side.png";
-import beach_sus_smile from "./beach_sus_smile.png";
+import beach_smug from "./beach_smug.png";
 import beach_sus from "./beach_sus.png";
 import casual_confused from "./casual_confused.png";
 import casual_excited from "./casual_excited.png";
 import casual_happy_alt from "./casual_happy_alt.png";
 import casual_happy from "./casual_happy.png";
 import casual_neutral from "./casual_neutral.png";
-import casual_sus_smile from "./casual_sus_smile.png";
+import casual_smug from "./casual_smug.png";
 import casual_sus from "./casual_sus.png";
 import confident_smile from "./confident_smile.png";
 import confident from "./confident.png";
@@ -35,8 +35,8 @@ import shocked from "./shocked.png";
 import surprised_raised from "./surprised_raised.png";
 import surprised from "./surprised.png";
 import sus_side from "./sus_side.png";
-import sus_smile_side from "./sus_smile_side.png";
-import sus_smile from "./sus_smile.png";
+import smug_side from "./smug_side.png";
+import smug from "./smug.png";
 import sus from "./sus.png";
 
 export {
@@ -55,16 +55,16 @@ export {
   beach_shocked,
   beach_surprised_happy,
   beach_surprised_raised,
-  beach_sus_side_smile,
+  beach_smug_side,
   beach_sus_side,
-  beach_sus_smile,
+  beach_smug,
   beach_sus,
   casual_confused,
   casual_excited,
   casual_happy_alt,
   casual_happy,
   casual_neutral,
-  casual_sus_smile,
+  casual_smug,
   casual_sus,
   confident_smile,
   confident,
@@ -77,7 +77,7 @@ export {
   surprised_raised,
   surprised,
   sus_side,
-  sus_smile_side,
-  sus_smile,
+  smug_side,
+  smug,
   sus,
 };

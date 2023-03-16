@@ -13,6 +13,9 @@ import twilightsparkle from "./twilightsparkle.png";
 import twilightsparkle_anxious from "./twilightsparkle_anxious.png";
 import twistagoo from "./twistagoo.png";
 import verena from "./verena.png";
+import javis from "./javis.png";
+import rarity from "./rarity.png";
+import santa from "./santa.png";
 
 export {
   AA_default,
@@ -30,4 +33,7 @@ export {
   twilightsparkle_anxious,
   twistagoo,
   verena,
+  javis,
+  rarity,
+  santa,
 };
