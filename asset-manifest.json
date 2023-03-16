@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.75561cb4.css",
-    "main.js": "/static/js/main.4c9eeeff.js",
+    "main.js": "/static/js/main.61c4077a.js",
     "static/media/chinacat.ttf": "/static/media/chinacat.a592acce856256e18915.ttf",
     "static/media/worried_happy.png": "/static/media/worried_happy.b3bd3ed146dd8a7fd391.png",
     "static/media/happy.png": "/static/media/happy.6e54ac45c88cfd21f9ec.png",
@@ -24,7 +24,7 @@
     "static/media/casual_happy_alt.png": "/static/media/casual_happy_alt.2484fdfeccd497762455.png",
     "static/media/casual_confused.png": "/static/media/casual_confused.84becda20d78f70d12d5.png",
     "static/media/casual_happy.png": "/static/media/casual_happy.bcd24be74af4adb95611.png",
-    "static/media/casual_sus_smile.png": "/static/media/casual_sus_smile.e2fd1b7c4f8b3b45abd7.png",
+    "static/media/casual_smug.png": "/static/media/casual_smug.e2fd1b7c4f8b3b45abd7.png",
     "static/media/casual_sus.png": "/static/media/casual_sus.464da5dc787ceb62bc48.png",
     "static/media/angry.png": "/static/media/angry.606ccd3c00a4e7676c17.png",
     "static/media/shocked.png": "/static/media/shocked.3310cc6ea823c6cb2b98.png",
@@ -38,9 +38,9 @@
     "static/media/surprised_raised.png": "/static/media/surprised_raised.8b019bc3a9f4b3eff74e.png",
     "static/media/surprised.png": "/static/media/surprised.05237f6162fa96774ac6.png",
     "static/media/killer_ray.png": "/static/media/killer_ray.6a51ba76c490cee11d9b.png",
-    "static/media/sus_smile.png": "/static/media/sus_smile.f82edd9bee913e18cc23.png",
+    "static/media/smug.png": "/static/media/smug.5f0794fb21c609aad5c2.png",
     "static/media/confident_smile.png": "/static/media/confident_smile.726457d9d822a19c3edd.png",
-    "static/media/sus_smile_side.png": "/static/media/sus_smile_side.c0d13eeb0a64741b435b.png",
+    "static/media/smug_side.png": "/static/media/smug_side.c0d13eeb0a64741b435b.png",
     "static/media/confident.png": "/static/media/confident.38316abbe4cec3751a98.png",
     "static/media/sus_side.png": "/static/media/sus_side.34ccbdfc0ed819e02265.png",
     "static/media/beach_happy.png": "/static/media/beach_happy.6bfc94e4b804ec0ead68.png",
@@ -53,11 +53,11 @@
     "static/media/beach_shocked.png": "/static/media/beach_shocked.f3b9fea12f8e9e169131.png",
     "static/media/beach_surprised_raised.png": "/static/media/beach_surprised_raised.69b60af7bc4b5ef5b910.png",
     "static/media/beach_angry.png": "/static/media/beach_angry.66580a8e21a9ff67b1eb.png",
-    "static/media/beach_sus_smile.png": "/static/media/beach_sus_smile.290a740d9e3a200ce151.png",
+    "static/media/beach_smug.png": "/static/media/beach_smug.290a740d9e3a200ce151.png",
     "static/media/beach_confident_smile.png": "/static/media/beach_confident_smile.671a9e16ad3c316867a2.png",
     "static/media/beach_sus.png": "/static/media/beach_sus.b9b5b9c910f4a7abc98d.png",
     "static/media/beach_confident.png": "/static/media/beach_confident.3c2d18e39d2df133cb69.png",
-    "static/media/beach_sus_side_smile.png": "/static/media/beach_sus_side_smile.889079d340f12e3f6d65.png",
+    "static/media/beach_smug_side.png": "/static/media/beach_smug_side.889079d340f12e3f6d65.png",
     "static/media/beach_sus_side.png": "/static/media/beach_sus_side.a35f825a5c79bf4696fd.png",
     "static/media/angry_blush.png": "/static/media/angry_blush.6cbd17b7e4d1723a37eb.png",
     "static/media/sad_blush.png": "/static/media/sad_blush.2f0078c94a50cbaad83c.png",
@@ -70,6 +70,7 @@
     "static/media/fluttershy.png": "/static/media/fluttershy.6f87a1d8146f060de236.png",
     "static/media/sad_side_blush.png": "/static/media/sad_side_blush.09c39b05f6275f014be4.png",
     "static/media/shocked_blush.png": "/static/media/shocked_blush.10658b72e870d80fc23a.png",
+    "static/media/rarity.png": "/static/media/rarity.953141c3969bcbac138a.png",
     "static/media/bully.png": "/static/media/bully.2bcd87931c75e839dc54.png",
     "static/media/winter_angry_tears.png": "/static/media/winter_angry_tears.23372b993ce7dc2faeb7.png",
     "static/media/winter_angry_smile.png": "/static/media/winter_angry_smile.db35ceb9709a76d38c19.png",
@@ -156,6 +157,7 @@
     "static/media/sl_oh_you.png": "/static/media/sl_oh_you.3d19575d5e978d4330bd.png",
     "static/media/bigby_alt.png": "/static/media/bigby_alt.5c63693324948a820205.png",
     "static/media/sl_happy.png": "/static/media/sl_happy.c81287db2795377b102b.png",
+    "static/media/javis.png": "/static/media/javis.3bb33f6b8caa7061c73e.png",
     "static/media/angry_tears.png": "/static/media/angry_tears.38e49f353f7d483f1d14.png",
     "static/media/happy_tears.png": "/static/media/happy_tears.5fb3fd33d541d75f3e03.png",
     "static/media/sad_smile.png": "/static/media/sad_smile.2b714ec79462ba983b26.png",
@@ -264,7 +266,6 @@
     "static/media/neutral_worried.png": "/static/media/neutral_worried.e2f32eadd837289f2606.png",
     "static/media/winter_angry_2.png": "/static/media/winter_angry_2.c7c128d38d33bde6c3eb.png",
     "static/media/crown_upset_2.png": "/static/media/crown_upset_2.d9fea1249a24e11488ef.png",
-    "static/media/smug.png": "/static/media/smug.5f0794fb21c609aad5c2.png",
     "static/media/crown_upset.png": "/static/media/crown_upset.5406885ff71aacf2ab41.png",
     "static/media/libra.png": "/static/media/libra.e70b77f4ddebfe7c389d.png",
     "static/media/winter_oh_you.png": "/static/media/winter_oh_you.14bb98acdb7d2d828b18.png",
@@ -301,10 +302,10 @@
     "static/media/shadow.webp": "/static/media/shadow.dbd86c145a084e8af4a7.webp",
     "index.html": "/index.html",
     "main.75561cb4.css.map": "/static/css/main.75561cb4.css.map",
-    "main.4c9eeeff.js.map": "/static/js/main.4c9eeeff.js.map"
+    "main.61c4077a.js.map": "/static/js/main.61c4077a.js.map"
   },
   "entrypoints": [
     "static/css/main.75561cb4.css",
-    "static/js/main.4c9eeeff.js"
+    "static/js/main.61c4077a.js"
   ]
 }
