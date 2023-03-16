@@ -186,7 +186,7 @@ const App = () => {
             {/* add range input */}
             <input
               type="range"
-              min="18"
+              min="10"
               max="50"
               value={dialogueSize}
               name="dialogue-size"
