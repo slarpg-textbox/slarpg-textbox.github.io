@@ -4,26 +4,6 @@ import * as icons from "./assets/faces";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
 
-const handleCaptureClick = async () => {
-  // canvas should html2canvas of the container div
-  // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
-  // To overcome this, I'll just combine the textbox and border into one image
-  const canvas = await html2canvas(document.querySelector(".output"), {
-    backgroundColor: null,
-    scale: 2,
-    allowTaint: true,
-    useCORS: true,
-    // download as 320x60 x2 due to scale
-    // width: 640,
-    // height: 120,
-  }).then((canvas) => {
-    return canvas;
-  });
-
-  // downloadjs should download the canvas as a png
-  downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
-};
-
 const App = () => {
   // face should useState of the melody_icon image that is imported
   const [character, setCharacter] = useState("melody");
@@ -31,16 +11,15 @@ const App = () => {
   const [expressions, setExpressions] = useState(
     Object.entries(require(`./assets/faces/melody/index.js`))
   );
-  // const [selectedExpression, setSelectedExpression] = useState();
   const [face, setFace] = useState(icons.melody._default);
-
   const [characterName, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
-  const [transparency, setTransparency] = useState("transparent");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("18");
   const [heart, setHeart] = useState("heart");
+  const [transparency, setTransparency] = useState("transparent");
+  const [scaleSize, setScale] = useState("2");
 
   const handleTextCharacter = (event) => setTextCharacter(event.target.value);
   const handleCharacterColor = (event) => setCharacterColor(event.target.value);
@@ -48,24 +27,20 @@ const App = () => {
   const handleTextDialogue = (event) => setTextDialogue(event.target.value);
   const handleDialogueColor = (event) => setDialogueColor(event.target.value);
   const handleDialogueSize = (event) => setDialogueSize(event.target.value);
+  const handleScale = (event) => setScale(event.target.value);
   // Event handler for when a character is selected
   const handleCharacterChange = (event) => {
     const character = event.target.value;
     setCharacter(character);
-
     // Load all the expressions for the selected character
     const expressions = require(`./assets/faces/${character}/index.js`);
     console.log(expressions);
     setExpressions(Object.entries(expressions));
     handleFace({ target: { value: expressions._default } });
-    // setSelectedExpression("");
-    // setFace(expressions[Object.entries(expressions)[0][0]]);
   };
-
   const handleFace = (event) => {
     // const expression = event.target.value;
     // setSelectedExpression(expression);
-
     if (event.target.name === "upload") {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -79,6 +54,26 @@ const App = () => {
 
   const handleHeart = (event) => {
     setHeart(event.target.value);
+  };
+
+  const handleCaptureClick = async () => {
+    // canvas should html2canvas of the container div
+    // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
+    // To overcome this, I'll just combine the textbox and border into one image
+    const canvas = await html2canvas(document.querySelector(".output"), {
+      backgroundColor: null,
+      scale: scaleSize,
+      allowTaint: true,
+      useCORS: true,
+      // download as 320x60 x2 due to scale
+      // width: 640, // 640px / 2
+      // height: 120, // 120px / 2
+    }).then((canvas) => {
+      return canvas;
+    });
+
+    // downloadjs should download the canvas as a png
+    downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
   };
 
   return (
@@ -177,7 +172,7 @@ const App = () => {
             value={dialogue}
             onChange={handleTextDialogue}
             rows="3"
-            cols="50"
+            cols="55"
           ></textarea>
           <br />
           <input
@@ -186,23 +181,6 @@ const App = () => {
             name="dialogue-color"
             onChange={handleDialogueColor}
           ></input>
-          <form onChange={handleTransparency}>
-            <span>Transparency ⬜️:</span>
-            <input
-              type="radio"
-              value="no-transparent"
-              name="transparency-switch"
-              checked={transparency === "no-transparent"}
-            />
-            <label htmlFor="no-heart">No</label>
-            <input
-              type="radio"
-              value="transparent"
-              name="transparency-switch"
-              checked={transparency === "transparent"}
-            />
-            <label htmlFor="transparency-switch">Yes</label>
-          </form>
           <form onChange={handleDialogueSize}>
             <span>Font size: </span>
             {/* add range input */}
@@ -256,6 +234,40 @@ const App = () => {
       </div>
 
       <div className="download">
+        <form onChange={handleTransparency}>
+          <span>Transparency ⬜️:</span>
+          <input
+            type="radio"
+            value="no-transparent"
+            name="transparency-switch"
+            checked={transparency === "no-transparent"}
+          />
+          <label htmlFor="no-heart">No</label>
+          <input
+            type="radio"
+            value="transparent"
+            name="transparency-switch"
+            checked={transparency === "transparent"}
+          />
+          <label htmlFor="transparency-switch">Yes</label>
+        </form>
+        <form onChange={handleScale}>
+          <span>Scale 𝌣:</span>
+          <input
+            type="radio"
+            value="1"
+            name="scale-switch"
+            checked={scaleSize === "1"}
+          />
+          <label htmlFor="no-heart">x1 (in-game)</label>
+          <input
+            type="radio"
+            value="2"
+            name="scale-switch"
+            checked={scaleSize === "2"}
+          />
+          <label htmlFor="transparency-switch">x2 (high res)</label>
+        </form>
         <a href="#" onClick={handleCaptureClick}>
           <button>Download</button>
         </a>

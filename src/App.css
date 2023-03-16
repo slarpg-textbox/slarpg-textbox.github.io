@@ -45,8 +45,8 @@ footer {
 #text {
   margin: 12px 5px;
   max-width: 500px;
-  max-height: 92px;
-  line-height: 1.25;
+  max-height: 95px;
+  line-height: 1.3;
   overflow: hidden;
   word-break: break-all;
   /* text-overflow: ellipsis; */
@@ -64,7 +64,7 @@ footer {
 }
 
 .download {
-  min-height: 27vh;
+  min-height: 29vh;
 }
 
 .footer {
