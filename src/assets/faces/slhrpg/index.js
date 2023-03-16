@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import applebloom from "./applebloom.png";
 import applejack from "./applejack.png";
 import babsseed from "./babsseed.png";
@@ -15,7 +15,7 @@ import twistagoo from "./twistagoo.png";
 import verena from "./verena.png";
 
 export {
-  _default,
+  AA_default,
   applebloom,
   applejack,
   babsseed,

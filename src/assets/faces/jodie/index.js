@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import angry_2 from "./angry_2.png";
 import angry from "./angry.png";
 import beach_angry_2 from "./beach_angry_2.png";
@@ -40,7 +40,7 @@ import sus_smile from "./sus_smile.png";
 import sus from "./sus.png";
 
 export {
-  _default,
+  AA_default,
   angry_2,
   angry,
   beach_angry_2,

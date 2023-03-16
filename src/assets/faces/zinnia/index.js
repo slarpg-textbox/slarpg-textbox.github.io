@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import beeg from "./beeg.png";
 import crying from "./crying.png";
 import happy from "./happy.png";
@@ -23,7 +23,7 @@ import worried_smile from "./worried_smile.png";
 import worried from "./worried.png";
 
 export {
-  _default,
+  AA_default,
   beeg,
   crying,
   happy,

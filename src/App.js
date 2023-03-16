@@ -11,7 +11,7 @@ const App = () => {
   const [expressions, setExpressions] = useState(
     Object.entries(require(`./assets/faces/melody/index.js`))
   );
-  const [face, setFace] = useState(icons.melody._default);
+  const [face, setFace] = useState(icons.melody.AA_default);
   const [characterName, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
@@ -36,7 +36,7 @@ const App = () => {
     const expressions = require(`./assets/faces/${character}/index.js`);
     console.log(expressions);
     setExpressions(Object.entries(expressions));
-    handleFace({ target: { value: expressions._default } });
+    handleFace({ target: { value: expressions.AA_default } });
   };
   const handleFace = (event) => {
     // const expression = event.target.value;

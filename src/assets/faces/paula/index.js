@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import angry from "./angry.png";
 import bully from "./bully.png";
 import confident_2 from "./confident_2.png";
@@ -22,7 +22,7 @@ import wink_neutral_2 from "./wink_neutral_2.png";
 import wink_neutral from "./wink_neutral.png";
 
 export {
-  _default,
+  AA_default,
   angry,
   bully,
   confident_2,

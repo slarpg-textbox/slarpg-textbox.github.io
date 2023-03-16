@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import amused from "./amused.png";
 import angry from "./angry.png";
 import confident from "./confident.png";
@@ -10,7 +10,7 @@ import reverse_neutral from "./reverse_neutral.png";
 import thinking from "./thinking.png";
 
 export {
-  _default,
+  AA_default,
   amused,
   angry,
   confident,

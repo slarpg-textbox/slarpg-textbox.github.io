@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import angry_2 from "./angry_2.png";
 import angry from "./angry.png";
 import blush_crying from "./blush_crying.png";
@@ -22,7 +22,7 @@ import sad_tears_alt from "./sad_tears_alt.png";
 import sad_tears from "./sad_tears.png";
 
 export {
-  _default,
+  AA_default,
   angry_2,
   angry,
   blush_crying,

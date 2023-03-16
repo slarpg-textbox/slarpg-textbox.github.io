@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import crud from "./crud.png";
 import daedalus from "./daedalus.png";
 import doc from "./doc.png";
@@ -11,7 +11,7 @@ import squash from "./squash.png";
 import stretch from "./stretch.png";
 
 export {
-  _default,
+  AA_default,
   crud,
   daedalus,
   doc,

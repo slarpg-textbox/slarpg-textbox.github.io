@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import angry from "./angry.png";
 import excited from "./excited.png";
 import eyeroll from "./eyeroll.png";
@@ -11,7 +11,7 @@ import sus from "./sus.png";
 import unamused from "./unamused.png";
 
 export {
-  _default,
+  AA_default,
   angry,
   excited,
   eyeroll,

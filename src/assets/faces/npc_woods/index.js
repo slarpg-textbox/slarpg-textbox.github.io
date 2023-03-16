@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import abella from "./abella.png";
 import bill_alt from "./bill_alt.png";
 import bill from "./bill.png";
@@ -21,7 +21,7 @@ import vicky from "./vicky.png";
 import yasmine from "./yasmine.png";
 
 export {
-  _default,
+  AA_default,
   abella,
   bill_alt,
   bill,

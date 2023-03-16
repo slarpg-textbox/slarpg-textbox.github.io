@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import bartholomew from "./bartholomew.png";
 import beth from "./beth.png";
 import bobby from "./bobby.png";
@@ -22,7 +22,7 @@ import shadow from "./shadow.webp";
 import sherry from "./sherry.png";
 
 export {
-  _default,
+  AA_default,
   bartholomew,
   beth,
   bobby,

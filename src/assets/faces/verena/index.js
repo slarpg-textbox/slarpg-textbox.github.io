@@ -1,4 +1,4 @@
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import angry_2 from "./angry_2.png";
 import angry_smile from "./angry_smile.png";
 import angry_tears_2 from "./angry_tears_2.png";
@@ -50,7 +50,7 @@ import worried_smile from "./worried_smile.png";
 import worried from "./worried.png";
 
 export {
-  _default,
+  AA_default,
   angry_2,
   angry_smile,
   angry_tears_2,

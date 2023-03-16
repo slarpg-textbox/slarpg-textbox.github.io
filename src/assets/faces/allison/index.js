@@ -1,7 +1,7 @@
 import angry from "./angry.png";
 import bruh from "./bruh.png";
 import confident from "./confident.png";
-import _default from "./_default.png";
+import AA_default from "./AA_default.png";
 import flustered from "./flustered.png";
 import happy_alt from "./happy_alt.png";
 import happy_closed from "./happy_closed.png";
@@ -27,7 +27,7 @@ export {
   angry,
   bruh,
   confident,
-  _default,
+  AA_default,
   flustered,
   happy_alt,
   happy_closed,
