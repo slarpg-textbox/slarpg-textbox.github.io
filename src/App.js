@@ -82,58 +82,64 @@ const App = () => {
         <h1>SLARPG Fake Quotes Generator</h1>
       </div>
       <div className="input">
+        <div className="faceselect-row">
+          <div>
+            <b>
+              <span>Face:</span>
+            </b>
+            <br />
+            {/* <select value={face} onChange={handleFace}> */}
+            <select value={character} onChange={handleCharacterChange}>
+              <optgroup label="Main Characters">
+                <option value="melody">Melody</option>
+                <option value="allison">Allison</option>
+                <option value="claire">Claire</option>
+                <option value="jodie">Jodie</option>
+              </optgroup>
+              <optgroup label="Enemies">
+                <option value="javis">Javis</option>
+                <option value="sons">Sons</option>
+                <option value="verena">Verena</option>
+                <option value="paula">Paula</option>
+                <option value="harmony">Harmony</option>
+              </optgroup>
+              <optgroup label="NPCs">
+                <option value="amelia">Amelia</option>
+                <option value="beverly">Beverly</option>
+                <option value="faith">Faith</option>
+                <option value="glyph">Glyph</option>
+                <option value="ipsy">Ipsy</option>
+                <option value="nef">Nef</option>
+                <option value="noel">Noel</option>
+                <option value="zinnia">Zinnia</option>
+              </optgroup>
+              <optgroup label="NPC Categories">
+                <option value="npc_desert">NPCs Desert</option>
+                <option value="npc_greenridge">NPCs Greenridge</option>
+                <option value="npc_woods">NPCs Woods</option>
+                <option value="slhrpg">SLHRPG</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div>
+            <b>
+              <span>Expression:</span>
+            </b>
+            <br />
+            {/* Load all options into the select based on icons.character.emotion */}
+            <select value={face} onChange={handleFace} disabled={!character}>
+              {/* <option value="">Select an expression</option> */}
+              {expressions.map(([expression, imageUrl]) => (
+                <option key={expression} value={imageUrl}>
+                  {expression}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <div>
-          <b>
-            <span>Face:</span>
-          </b>
-          <br />
-          {/* <select value={face} onChange={handleFace}> */}
-          <select value={character} onChange={handleCharacterChange}>
-            <optgroup label="Main Characters">
-              <option value="melody">Melody</option>
-              <option value="allison">Allison</option>
-              <option value="claire">Claire</option>
-              <option value="jodie">Jodie</option>
-            </optgroup>
-            <optgroup label="Enemies">
-              <option value="javis">Javis</option>
-              <option value="sons">Sons</option>
-              <option value="verena">Verena</option>
-              <option value="paula">Paula</option>
-              <option value="harmony">Harmony</option>
-            </optgroup>
-            <optgroup label="NPCs">
-              <option value="amelia">Amelia</option>
-              <option value="beverly">Beverly</option>
-              <option value="faith">Faith</option>
-              <option value="glyph">Glyph</option>
-              <option value="ipsy">Ipsy</option>
-              <option value="nef">Nef</option>
-              <option value="noel">Noel</option>
-              <option value="npc_desert">NPCs Desert</option>
-              <option value="npc_greenridge">NPCs Greenridge</option>
-              <option value="npc_woods">NPCs Woods</option>
-              <option value="slhrpg">SLHRPG</option>
-              <option value="zinnia">Zinnia</option>
-            </optgroup>
-          </select>
-
-          <br />
-          <b>
-            <span>Expression:</span>
-          </b>
-          <br />
-          {/* Load all options into the select based on icons.character.emotion */}
-          <select value={face} onChange={handleFace} disabled={!character}>
-            {/* <option value="">Select an expression</option> */}
-            {expressions.map(([expression, imageUrl]) => (
-              <option key={expression} value={imageUrl}>
-                {expression}
-              </option>
-            ))}
-          </select>
-
-          <br />
           {/* THe form should read the image and pass it to the handleFace function */}
           <form onChange={handleFace}>
             <span>Custom face:{"  "}</span>

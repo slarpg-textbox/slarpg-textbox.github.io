@@ -12,6 +12,12 @@ footer {
   margin-bottom: 10px;
 }
 
+.faceselect-row {
+  display: flex;
+  /* justify-content: space-between; */
+  max-width: 300px;
+}
+
 .output {
   font-family: ChinaCat, Roboto, calibri;
   background-size: contain;
@@ -64,7 +70,7 @@ footer {
 }
 
 .download {
-  min-height: 29vh;
+  min-height: 32vh;
 }
 
 .footer {
