@@ -35,6 +35,7 @@ const App = () => {
     // Load all the expressions for the selected character
     const expressions = require(`./assets/faces/${character}/index.js`);
     console.log(expressions);
+    setTextCharacter(character.charAt(0).toUpperCase() + character.slice(1));
     setExpressions(Object.entries(expressions));
     handleFace({ target: { value: expressions.AA_default } });
   };
