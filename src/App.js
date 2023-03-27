@@ -3,8 +3,12 @@ import "./App.css";
 import * as icons from "./assets/faces";
 import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
+import Collection from "./components/Collection";
+import Textbox from "./components/Textbox";
 
 const App = () => {
+  const [outputs, setOutputs] = useState([]);
+
   // face should useState of the melody_icon image that is imported
   const [character, setCharacter] = useState("melody");
   // use melody's expressions as the default to load the expressions
@@ -18,7 +22,7 @@ const App = () => {
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("18");
   const [heart, setHeart] = useState("heart");
-  const [transparency, setTransparency] = useState("transparent");
+  const [transparency, setTransparency] = useState("no-transparent");
   const [scaleSize, setScale] = useState("2");
 
   const handleTextCharacter = (event) => setTextCharacter(event.target.value);
@@ -57,7 +61,7 @@ const App = () => {
     setHeart(event.target.value);
   };
 
-  const handleCaptureClick = async () => {
+  const handleCaptureOutput = async () => {
     // canvas should html2canvas of the container div
     // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
     // To overcome this, I'll just combine the textbox and border into one image
@@ -66,9 +70,6 @@ const App = () => {
       scale: scaleSize,
       allowTaint: true,
       useCORS: true,
-      // download as 320x60 x2 due to scale
-      // width: 640, // 640px / 2
-      // height: 120, // 120px / 2
     }).then((canvas) => {
       return canvas;
     });
@@ -77,230 +78,295 @@ const App = () => {
     downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
   };
 
+  const handleCaptureCollection = async () => {
+    // canvas should html2canvas of the container div
+    // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
+    // To overcome this, I'll just combine the textbox and border into one image
+    const canvas = await html2canvas(document.querySelector(".collection"), {
+      backgroundColor: null,
+      scale: scaleSize,
+      allowTaint: true,
+      useCORS: true,
+    }).then((canvas) => {
+      return canvas;
+    });
+
+    // downloadjs should download the canvas as a png
+    downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
+  };
+
+  const addToCollection = () => {
+    const newOutput = {
+      heart: heart,
+      transparency: transparency,
+      face: face,
+      characterColor: characterColor,
+      characterName: characterName,
+      dialogueColor: dialogueColor,
+      dialogueSize: dialogueSize,
+      dialogue: dialogue,
+    };
+    setOutputs([...outputs, newOutput]);
+    console.log(newOutput, newOutput.length);
+  };
+
+  const clearCollection = () => {
+    setOutputs([]);
+  };
+
+  const insertIntoCollection = (index) => {
+    const newOutput = {
+      heart: heart,
+      transparency: transparency,
+      face: face,
+      characterColor: characterColor,
+      characterName: characterName,
+      dialogueColor: dialogueColor,
+      dialogueSize: dialogueSize,
+      dialogue: dialogue,
+    };
+    const newOutputs = outputs.slice();
+    newOutputs.splice(index, 0, newOutput);
+    setOutputs(newOutputs);
+  };
+
+  const removeFromCollection = (index) => {
+    // const newOutputs = outputs.filter((output, i) => i !== index);
+    // setOutputs(newOutputs);
+
+    // newOutputs removes last element from outputs
+    const newOutputs = outputs.slice();
+    newOutputs.splice(outputs.length - 1, 1);
+    setOutputs(newOutputs);
+  };
+
   return (
-    <div className="outer">
-      <div className="header">
-        <h1>SLARPG Fake Quotes Generator</h1>
-      </div>
-      <div className="input">
-        <div className="faceselect-row">
+    <div className="parent">
+      <div className="child">
+        <div className="header">
+          <h1>SLARPG Fake Quotes Generator</h1>
+        </div>
+        <div className="input">
+          <div className="faceselect-row">
+            <div>
+              <b>
+                <span>Face:</span>
+              </b>
+              <br />
+              {/* <select value={face} onChange={handleFace}> */}
+              <select value={character} onChange={handleCharacterChange}>
+                <optgroup label="Main Characters">
+                  <option value="melody">Melody</option>
+                  <option value="allison">Allison</option>
+                  <option value="claire">Claire</option>
+                  <option value="jodie">Jodie</option>
+                </optgroup>
+                <optgroup label="Enemies">
+                  <option value="javis">Javis</option>
+                  <option value="sons">Sons</option>
+                  <option value="verena">Verena</option>
+                  <option value="paula">Paula</option>
+                  <option value="harmony">Harmony</option>
+                </optgroup>
+                <optgroup label="NPCs">
+                  <option value="amelia">Amelia</option>
+                  <option value="beverly">Beverly</option>
+                  <option value="faith">Faith</option>
+                  <option value="glyph">Glyph</option>
+                  <option value="ipsy">Ipsy</option>
+                  <option value="nef">Nef</option>
+                  <option value="noel">Noel</option>
+                  <option value="zinnia">Zinnia</option>
+                </optgroup>
+                <optgroup label="NPC Categories">
+                  <option value="npc_desert">NPCs Desert</option>
+                  <option value="npc_greenridge">NPCs Greenridge</option>
+                  <option value="npc_woods">NPCs Woods</option>
+                  <option value="slhrpg">SLHRPG</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div>
+              <b>
+                <span>Expression:</span>
+              </b>
+              <br />
+              {/* Load all options into the select based on icons.character.emotion */}
+              <select value={face} onChange={handleFace} disabled={!character}>
+                {/* <option value="">Select an expression</option> */}
+                {expressions.map(([expression, imageUrl]) => (
+                  <option key={expression} value={imageUrl}>
+                    {expression}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <div>
-            <b>
-              <span>Face:</span>
-            </b>
-            <br />
-            {/* <select value={face} onChange={handleFace}> */}
-            <select value={character} onChange={handleCharacterChange}>
-              <optgroup label="Main Characters">
-                <option value="melody">Melody</option>
-                <option value="allison">Allison</option>
-                <option value="claire">Claire</option>
-                <option value="jodie">Jodie</option>
-              </optgroup>
-              <optgroup label="Enemies">
-                <option value="javis">Javis</option>
-                <option value="sons">Sons</option>
-                <option value="verena">Verena</option>
-                <option value="paula">Paula</option>
-                <option value="harmony">Harmony</option>
-              </optgroup>
-              <optgroup label="NPCs">
-                <option value="amelia">Amelia</option>
-                <option value="beverly">Beverly</option>
-                <option value="faith">Faith</option>
-                <option value="glyph">Glyph</option>
-                <option value="ipsy">Ipsy</option>
-                <option value="nef">Nef</option>
-                <option value="noel">Noel</option>
-                <option value="zinnia">Zinnia</option>
-              </optgroup>
-              <optgroup label="NPC Categories">
-                <option value="npc_desert">NPCs Desert</option>
-                <option value="npc_greenridge">NPCs Greenridge</option>
-                <option value="npc_woods">NPCs Woods</option>
-                <option value="slhrpg">SLHRPG</option>
-              </optgroup>
-            </select>
+            {/* THe form should read the image and pass it to the handleFace function */}
+            <form onChange={handleFace}>
+              <span>Custom face:{"  "}</span>
+              <input
+                type="file"
+                name="upload"
+                accept=".jpg, .jpeg, .png, .webp, .gif, .svg"
+              ></input>{" "}
+            </form>
           </div>
 
           <div>
             <b>
-              <span>Expression:</span>
+              <span>Character:</span>
             </b>
             <br />
-            {/* Load all options into the select based on icons.character.emotion */}
-            <select value={face} onChange={handleFace} disabled={!character}>
-              {/* <option value="">Select an expression</option> */}
-              {expressions.map(([expression, imageUrl]) => (
-                <option key={expression} value={imageUrl}>
-                  {expression}
-                </option>
-              ))}
-            </select>
+            <input
+              type="text"
+              value={characterName}
+              onChange={handleTextCharacter}
+            />
+            <br />
+            <input
+              type="color"
+              value={characterColor}
+              name="character-color"
+              onChange={handleCharacterColor}
+            ></input>
+          </div>
+          <div>
+            <b>
+              <span>Dialogue:</span>
+            </b>
+            <br />
+            <textarea
+              value={dialogue}
+              onChange={handleTextDialogue}
+              rows="3"
+              cols="55"
+            ></textarea>
+            <br />
+            <input
+              type="color"
+              value={dialogueColor}
+              name="dialogue-color"
+              onChange={handleDialogueColor}
+            ></input>
+            <form onChange={handleDialogueSize}>
+              <span>Font size: </span>
+              {/* add range input */}
+              <input
+                type="range"
+                min="10"
+                max="50"
+                value={dialogueSize}
+                name="dialogue-size"
+                onChange={handleDialogueSize}
+              />{" "}
+              {dialogueSize}px
+            </form>
+            <form onChange={handleHeart}>
+              <span>Heart 💛: </span>
+              <input
+                type="radio"
+                value="no-heart"
+                name="heart-switch"
+                checked={heart === "no-heart"}
+              />
+              <label htmlFor="no-heart">No</label>
+              <input
+                type="radio"
+                value="heart"
+                name="heart-switch"
+                checked={heart === "heart"}
+              />
+              <label htmlFor="heart">Yes</label>
+            </form>
           </div>
         </div>
 
-        <div>
-          {/* THe form should read the image and pass it to the handleFace function */}
-          <form onChange={handleFace}>
-            <span>Custom face:{"  "}</span>
-            <input
-              type="file"
-              name="upload"
-              accept=".jpg, .jpeg, .png, .webp, .gif, .svg"
-            ></input>{" "}
-          </form>
-        </div>
+        <Textbox
+          heart={heart}
+          transparency={transparency}
+          face={face}
+          characterColor={characterColor}
+          characterName={characterName}
+          dialogueColor={dialogueColor}
+          dialogueSize={dialogueSize}
+          dialogue={dialogue}
+        />
 
-        <div>
-          <b>
-            <span>Character:</span>
-          </b>
-          <br />
-          <input
-            type="text"
-            value={characterName}
-            onChange={handleTextCharacter}
-          />
-          <br />
-          <input
-            type="color"
-            value={characterColor}
-            name="character-color"
-            onChange={handleCharacterColor}
-          ></input>
-        </div>
-        <div>
-          <b>
-            <span>Dialogue:</span>
-          </b>
-          <br />
-          <textarea
-            value={dialogue}
-            onChange={handleTextDialogue}
-            rows="3"
-            cols="55"
-          ></textarea>
-          <br />
-          <input
-            type="color"
-            value={dialogueColor}
-            name="dialogue-color"
-            onChange={handleDialogueColor}
-          ></input>
-          <form onChange={handleDialogueSize}>
-            <span>Font size: </span>
-            {/* add range input */}
-            <input
-              type="range"
-              min="10"
-              max="50"
-              value={dialogueSize}
-              name="dialogue-size"
-              onChange={handleDialogueSize}
-            />{" "}
-            {dialogueSize}px
-          </form>
-          <form onChange={handleHeart}>
-            <span>Heart ❤️: </span>
+        <div className="download">
+          <form onChange={handleTransparency}>
+            <span>Transparency ⬜️:</span>
             <input
               type="radio"
-              value="no-heart"
-              name="heart-switch"
-              checked={heart === "no-heart"}
+              value="no-transparent"
+              name="transparency-switch"
+              checked={transparency === "no-transparent"}
             />
-            <label htmlFor="no-heart">No</label>
+            <label htmlFor="no-transparent">No</label>
             <input
               type="radio"
-              value="heart"
-              name="heart-switch"
-              checked={heart === "heart"}
+              value="transparent"
+              name="transparency-switch"
+              checked={transparency === "transparent"}
             />
-            <label htmlFor="heart">Yes</label>
+            <label htmlFor="transparent">Yes</label>
           </form>
+          <form onChange={handleScale}>
+            <span>Scale 𝌣:</span>
+            <input
+              type="radio"
+              value="1"
+              name="scale-switch"
+              checked={scaleSize === "1"}
+            />
+            <label htmlFor="1">x1 (in-game)</label>
+            <input
+              type="radio"
+              value="2"
+              name="scale-switch"
+              checked={scaleSize === "2"}
+            />
+            <label htmlFor="2">x2 (high res)</label>
+          </form>
+          <button onClick={handleCaptureOutput}>Download</button>
         </div>
-      </div>
 
-      <div className={`output ${heart} ${transparency}`}>
-        <div id="image">
-          <img src={face} alt="no image" width="96" height="96" />
-        </div>
-        <div id="text">
-          {/* set font color to be characterColor */}
-          <p id="subject" style={{ color: characterColor }}>
-            {characterName}
+        <footer>
+          <p>
+            View the code/contribute here:{" "}
+            <a
+              href="https://github.com/slarpg-textbox/slarpg-textbox.github.io"
+              target="_blank"
+            >
+              https://github.com/slarpg-textbox/slarpg-textbox.github.io
+            </a>
           </p>
-          {/* style with font-size dialoguesize */}
-          <p
-            id="description"
-            style={{ color: dialogueColor, fontSize: dialogueSize + "px" }}
-          >
-            {dialogue}
-          </p>
+          <small>
+            Sprites belong to the{" "}
+            <a href="https://slarpg.com/" target="_blank">
+              Super Lesbian Animal RPG
+            </a>{" "}
+            game and received permission to use and host from{" "}
+            <a href="https://ponett.tumblr.com/" target="_blank">
+              ponett
+            </a>
+          </small>
+        </footer>
+      </div>
+      <div className="child">
+        <h2>Multiple Textbox 🚧 (beta)</h2>
+        <button onClick={addToCollection}>Add</button>
+        {/* <button onClick={insertIntoCollection}>Insert into Collection</button> */}
+        <button onClick={removeFromCollection}>Remove last</button>
+        <button onClick={clearCollection}>Clear</button>
+        <div className="collection">
+          <Collection transparency={transparency} outputs={outputs} />
         </div>
+        <button onClick={handleCaptureCollection}>Download</button>
       </div>
-
-      <div className="download">
-        <form onChange={handleTransparency}>
-          <span>Transparency ⬜️:</span>
-          <input
-            type="radio"
-            value="no-transparent"
-            name="transparency-switch"
-            checked={transparency === "no-transparent"}
-          />
-          <label htmlFor="no-heart">No</label>
-          <input
-            type="radio"
-            value="transparent"
-            name="transparency-switch"
-            checked={transparency === "transparent"}
-          />
-          <label htmlFor="transparency-switch">Yes</label>
-        </form>
-        <form onChange={handleScale}>
-          <span>Scale 𝌣:</span>
-          <input
-            type="radio"
-            value="1"
-            name="scale-switch"
-            checked={scaleSize === "1"}
-          />
-          <label htmlFor="no-heart">x1 (in-game)</label>
-          <input
-            type="radio"
-            value="2"
-            name="scale-switch"
-            checked={scaleSize === "2"}
-          />
-          <label htmlFor="transparency-switch">x2 (high res)</label>
-        </form>
-        <a href="#" onClick={handleCaptureClick}>
-          <button>Download</button>
-        </a>
-      </div>
-
-      <footer>
-        <p>
-          View the code/contribute here:{" "}
-          <a
-            href="https://github.com/slarpg-textbox/slarpg-textbox.github.io"
-            target="_blank"
-          >
-            https://github.com/slarpg-textbox/slarpg-textbox.github.io
-          </a>
-        </p>
-        <small>
-          Sprites belong to the{" "}
-          <a href="https://slarpg.com/" target="_blank">
-            Super Lesbian Animal RPG
-          </a>{" "}
-          game and received permission to use and host from{" "}
-          <a href="https://ponett.tumblr.com/" target="_blank">
-            ponett
-          </a>
-        </small>
-      </footer>
     </div>
   );
 };

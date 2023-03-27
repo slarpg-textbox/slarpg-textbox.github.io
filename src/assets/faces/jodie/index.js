@@ -17,13 +17,6 @@ import beach_smug_side from "./beach_smug_side.png";
 import beach_sus_side from "./beach_sus_side.png";
 import beach_smug from "./beach_smug.png";
 import beach_sus from "./beach_sus.png";
-import casual_confused from "./casual_confused.png";
-import casual_excited from "./casual_excited.png";
-import casual_happy_alt from "./casual_happy_alt.png";
-import casual_happy from "./casual_happy.png";
-import casual_neutral from "./casual_neutral.png";
-import casual_smug from "./casual_smug.png";
-import casual_sus from "./casual_sus.png";
 import confident_smile from "./confident_smile.png";
 import confident from "./confident.png";
 import confused from "./confused.png";
@@ -59,13 +52,6 @@ export {
   beach_sus_side,
   beach_smug,
   beach_sus,
-  casual_confused,
-  casual_excited,
-  casual_happy_alt,
-  casual_happy,
-  casual_neutral,
-  casual_smug,
-  casual_sus,
   confident_smile,
   confident,
   confused,

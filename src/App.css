@@ -3,7 +3,15 @@
   src: url(assets/fonts/chinacat.ttf);
 }
 
-.outer > div,
+.parent {
+  display: flex;
+  width: 50%;
+}
+.child {
+  flex: 1;
+}
+
+.child > div,
 footer {
   margin: 10px 20px;
 }
@@ -69,8 +77,15 @@ footer {
   font-size: 18px;
 }
 
+.collection {
+  width: 640px;
+}
+.collection .output {
+  margin-bottom: 2px;
+}
+
 .download {
-  min-height: 32vh;
+  min-height: 28vh;
 }
 
 .footer {
