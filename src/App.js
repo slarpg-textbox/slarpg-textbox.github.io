@@ -7,7 +7,13 @@ import Collection from "./components/Collection";
 import Textbox from "./components/Textbox";
 
 const App = () => {
-  const [outputs, setOutputs] = useState([]);
+  const [outputs, setOutputs] = useState(
+    JSON.parse(localStorage.getItem("outputs")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("outputs", JSON.stringify(outputs));
+  }, [outputs]);
 
   // face should useState of the melody_icon image that is imported
   const [character, setCharacter] = useState("melody");
