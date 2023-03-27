@@ -7,14 +7,6 @@ import Collection from "./components/Collection";
 import Textbox from "./components/Textbox";
 
 const App = () => {
-  const [outputs, setOutputs] = useState(
-    JSON.parse(localStorage.getItem("outputs")) || []
-  );
-
-  useEffect(() => {
-    localStorage.setItem("outputs", JSON.stringify(outputs));
-  }, [outputs]);
-
   // face should useState of the melody_icon image that is imported
   const [character, setCharacter] = useState("melody");
   // use melody's expressions as the default to load the expressions
@@ -66,12 +58,8 @@ const App = () => {
   const handleHeart = (event) => {
     setHeart(event.target.value);
   };
-
-  const handleCaptureOutput = async () => {
-    // canvas should html2canvas of the container div
-    // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
-    // To overcome this, I'll just combine the textbox and border into one image
-    const canvas = await html2canvas(document.querySelector(".output"), {
+  const handleCapture = async (selector) => {
+    const canvas = await html2canvas(document.querySelector(selector), {
       backgroundColor: null,
       scale: scaleSize,
       allowTaint: true,
@@ -80,26 +68,22 @@ const App = () => {
       return canvas;
     });
 
-    // downloadjs should download the canvas as a png
     downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
   };
 
-  const handleCaptureCollection = async () => {
-    // canvas should html2canvas of the container div
-    // Limitation: it can't capture border-image: https://github.com/niklasvh/html2canvas/issues/1287
-    // To overcome this, I'll just combine the textbox and border into one image
-    const canvas = await html2canvas(document.querySelector(".collection"), {
-      backgroundColor: null,
-      scale: scaleSize,
-      allowTaint: true,
-      useCORS: true,
-    }).then((canvas) => {
-      return canvas;
-    });
-
-    // downloadjs should download the canvas as a png
-    downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
-  };
+  // collection
+  const [outputs, setOutputs] = useState(
+    JSON.parse(localStorage.getItem("outputs")) || []
+  );
+  useEffect(() => {
+    localStorage.setItem("outputs", JSON.stringify(outputs));
+  }, [outputs]);
+  const [insertCollectionValue, setInsertCollectionValue] = useState(0);
+  const [removeCollectionValue, setRemoveCollectionValue] = useState(0);
+  const handleInsertCollectionValue = (event) =>
+    setInsertCollectionValue(event.target.value);
+  const handleRemoveCollectionValue = (event) =>
+    setRemoveCollectionValue(event.target.value);
 
   const addToCollection = () => {
     const newOutput = {
@@ -115,35 +99,35 @@ const App = () => {
     setOutputs([...outputs, newOutput]);
     console.log(newOutput, newOutput.length);
   };
-
+  const insertIntoCollection = () => {
+    if (insertCollectionValue > 0) {
+      const newOutput = {
+        heart: heart,
+        transparency: transparency,
+        face: face,
+        characterColor: characterColor,
+        characterName: characterName,
+        dialogueColor: dialogueColor,
+        dialogueSize: dialogueSize,
+        dialogue: dialogue,
+      };
+      const newOutputs = outputs.slice();
+      newOutputs.splice(insertCollectionValue - 1, 0, newOutput);
+      setOutputs(newOutputs);
+    }
+  };
+  const removeFromCollection = () => {
+    if (removeCollectionValue > 0) {
+      // remove at the index
+      const newOutput = outputs.slice();
+      newOutput.splice(removeCollectionValue - 1, 1);
+      setOutputs(newOutput);
+    }
+  };
   const clearCollection = () => {
     setOutputs([]);
-  };
-
-  const insertIntoCollection = (index) => {
-    const newOutput = {
-      heart: heart,
-      transparency: transparency,
-      face: face,
-      characterColor: characterColor,
-      characterName: characterName,
-      dialogueColor: dialogueColor,
-      dialogueSize: dialogueSize,
-      dialogue: dialogue,
-    };
-    const newOutputs = outputs.slice();
-    newOutputs.splice(index, 0, newOutput);
-    setOutputs(newOutputs);
-  };
-
-  const removeFromCollection = (index) => {
-    // const newOutputs = outputs.filter((output, i) => i !== index);
-    // setOutputs(newOutputs);
-
-    // newOutputs removes last element from outputs
-    const newOutputs = outputs.slice();
-    newOutputs.splice(outputs.length - 1, 1);
-    setOutputs(newOutputs);
+    setInsertCollectionValue(0);
+    setRemoveCollectionValue(0);
   };
 
   return (
@@ -159,7 +143,6 @@ const App = () => {
                 <span>Face:</span>
               </b>
               <br />
-              {/* <select value={face} onChange={handleFace}> */}
               <select value={character} onChange={handleCharacterChange}>
                 <optgroup label="Main Characters">
                   <option value="melody">Melody</option>
@@ -211,7 +194,7 @@ const App = () => {
           </div>
 
           <div>
-            {/* THe form should read the image and pass it to the handleFace function */}
+            {/* The form should read the image and pass it to the handleFace function */}
             <form onChange={handleFace}>
               <span>Custom face:{"  "}</span>
               <input
@@ -249,7 +232,7 @@ const App = () => {
               value={dialogue}
               onChange={handleTextDialogue}
               rows="3"
-              cols="55"
+              cols="60"
             ></textarea>
             <br />
             <input
@@ -337,7 +320,7 @@ const App = () => {
             />
             <label htmlFor="2">x2 (high res)</label>
           </form>
-          <button onClick={handleCaptureOutput}>Download</button>
+          <button onClick={() => handleCapture(".output")}>Download</button>
         </div>
 
         <footer>
@@ -362,16 +345,34 @@ const App = () => {
           </small>
         </footer>
       </div>
+
       <div className="child">
-        <h2>Multiple Textbox 🚧 (beta)</h2>
+        <h1>Multiple Textbox</h1>
+        <p>
+          Index is <b>1-{outputs.length}</b>
+        </p>
         <button onClick={addToCollection}>Add</button>
-        {/* <button onClick={insertIntoCollection}>Insert into Collection</button> */}
-        <button onClick={removeFromCollection}>Remove last</button>
-        <button onClick={clearCollection}>Clear</button>
+        <button onClick={insertIntoCollection} className="collection-btn">
+          Insert
+        </button>
+        <input
+          value={insertCollectionValue}
+          onChange={handleInsertCollectionValue}
+        ></input>
+        <button onClick={removeFromCollection} className="collection-btn">
+          Remove
+        </button>
+        <input
+          value={removeCollectionValue}
+          onChange={handleRemoveCollectionValue}
+        ></input>
+        <button onClick={clearCollection} className="collection-btn">
+          Clear
+        </button>
         <div className="collection">
           <Collection transparency={transparency} outputs={outputs} />
         </div>
-        <button onClick={handleCaptureCollection}>Download</button>
+        <button onClick={() => handleCapture(".collection")}>Download</button>
       </div>
     </div>
   );
