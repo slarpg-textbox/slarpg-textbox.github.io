@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import * as icons from "./assets/faces";
-import downloadjs from "downloadjs";
 import html2canvas from "html2canvas";
+import downloadjs from "downloadjs";
 import Collection from "./components/Collection";
 import Textbox from "./components/Textbox";
 
@@ -30,7 +30,8 @@ const App = () => {
   const handleDialogueColor = (event) => setDialogueColor(event.target.value);
   const handleDialogueSize = (event) => setDialogueSize(event.target.value);
   const handleScale = (event) => setScale(event.target.value);
-  // Event handler for when a character is selected
+  const handleHeart = (event) => setHeart(event.target.value);
+  // Loads all expressions for selected character
   const handleCharacterChange = (event) => {
     const character = event.target.value;
     setCharacter(character);
@@ -44,7 +45,7 @@ const App = () => {
   const handleFace = (event) => {
     // const expression = event.target.value;
     // setSelectedExpression(expression);
-    if (event.target.name === "upload") {
+    if (event.target.name === "upload-face") {
       const reader = new FileReader();
       reader.onload = function (e) {
         setFace(e.target.result);
@@ -53,22 +54,6 @@ const App = () => {
     } else {
       setFace(event.target.value);
     }
-  };
-
-  const handleHeart = (event) => {
-    setHeart(event.target.value);
-  };
-  const handleCapture = async (selector) => {
-    const canvas = await html2canvas(document.querySelector(selector), {
-      backgroundColor: null,
-      scale: scaleSize,
-      allowTaint: true,
-      useCORS: true,
-    }).then((canvas) => {
-      return canvas;
-    });
-
-    downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
   };
 
   // collection
@@ -128,6 +113,48 @@ const App = () => {
     setOutputs([]);
     setInsertCollectionValue(0);
     setRemoveCollectionValue(0);
+  };
+  // download the image
+  const handleDownload = async (selector) => {
+    const canvas = await html2canvas(document.querySelector(selector), {
+      backgroundColor: null,
+      scale: scaleSize,
+      allowTaint: true,
+      useCORS: true,
+    }).then((canvas) => {
+      return canvas;
+    });
+
+    downloadjs(canvas.toDataURL(), "textbox.png", "image/png");
+  };
+  // download the current outputs as a JSON file
+  const handleSaveJSON = () => {
+    // ask for filename
+    const filename = prompt("Enter filename", "outputs");
+    if (filename) {
+      // create a blob object with the JSON data
+      const blob = new Blob([JSON.stringify(outputs)], {
+        type: "application/json",
+      });
+      // download the blob object as a file
+      downloadjs(blob, filename);
+    }
+  };
+  // load a JSON file and set the outputs to the contents of the file
+  const handleLoadJSON = (event) => {
+    // if the json file has invalid syntax, this will throw an error
+    try {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setOutputs(JSON.parse(e.target.result));
+      };
+      reader.readAsText(file);
+      // reset the file input so that the same file can be loaded again
+      event.target.value = null;
+    } catch (e) {
+      alert("Invalid JSON file");
+    }
   };
 
   return (
@@ -195,14 +222,15 @@ const App = () => {
 
           <div>
             {/* The form should read the image and pass it to the handleFace function */}
-            <form onChange={handleFace}>
-              <span>Custom face:{"  "}</span>
-              <input
-                type="file"
-                name="upload"
-                accept=".jpg, .jpeg, .png, .webp, .gif, .svg"
-              ></input>{" "}
-            </form>
+            <small>
+              <label htmlFor="upload-face">Custom Face: </label>
+            </small>
+            <input
+              type="file"
+              name="upload-face"
+              accept=".jpg, .jpeg, .png, .webp, .gif, .svg"
+              onChange={handleFace}
+            ></input>{" "}
           </div>
 
           <div>
@@ -241,7 +269,7 @@ const App = () => {
               name="dialogue-color"
               onChange={handleDialogueColor}
             ></input>
-            <form onChange={handleDialogueSize}>
+            <div>
               <span>Font size: </span>
               {/* add range input */}
               <input
@@ -253,14 +281,15 @@ const App = () => {
                 onChange={handleDialogueSize}
               />{" "}
               {dialogueSize}px
-            </form>
-            <form onChange={handleHeart}>
+            </div>
+            <div>
               <span>Heart 💛: </span>
               <input
                 type="radio"
                 value="no-heart"
                 name="heart-switch"
                 checked={heart === "no-heart"}
+                onChange={handleHeart}
               />
               <label htmlFor="no-heart">No</label>
               <input
@@ -268,9 +297,10 @@ const App = () => {
                 value="heart"
                 name="heart-switch"
                 checked={heart === "heart"}
+                onChange={handleHeart}
               />
               <label htmlFor="heart">Yes</label>
-            </form>
+            </div>
           </div>
         </div>
 
@@ -286,12 +316,13 @@ const App = () => {
         />
 
         <div className="download">
-          <form onChange={handleTransparency}>
+          <div>
             <span>Transparency ⬜️:</span>
             <input
               type="radio"
               value="no-transparent"
               name="transparency-switch"
+              onChange={handleTransparency}
               checked={transparency === "no-transparent"}
             />
             <label htmlFor="no-transparent">No</label>
@@ -299,17 +330,19 @@ const App = () => {
               type="radio"
               value="transparent"
               name="transparency-switch"
+              onChange={handleTransparency}
               checked={transparency === "transparent"}
             />
             <label htmlFor="transparent">Yes</label>
-          </form>
-          <form onChange={handleScale}>
+          </div>
+          <div>
             <span>Scale 𝌣:</span>
             <input
               type="radio"
               value="1"
               name="scale-switch"
               checked={scaleSize === "1"}
+              onChange={handleScale}
             />
             <label htmlFor="1">x1 (in-game)</label>
             <input
@@ -317,10 +350,13 @@ const App = () => {
               value="2"
               name="scale-switch"
               checked={scaleSize === "2"}
+              onChange={handleScale}
             />
             <label htmlFor="2">x2 (high res)</label>
-          </form>
-          <button onClick={() => handleCapture(".output")}>Download</button>
+          </div>
+          <button onClick={() => handleDownload(".output")}>
+            Download Image
+          </button>
         </div>
 
         <footer>
@@ -372,7 +408,24 @@ const App = () => {
         <div className="collection">
           <Collection transparency={transparency} outputs={outputs} />
         </div>
-        <button onClick={() => handleCapture(".collection")}>Download</button>
+        <button onClick={() => handleDownload(".collection")}>
+          Download Image
+        </button>
+        <button onClick={handleSaveJSON} className="collection-btn">
+          Save JSON
+        </button>
+        <small>
+          <label htmlFor="load-json" className="collection-btn">
+            Load JSON:{" "}
+          </label>
+        </small>
+        <input
+          type="file"
+          name="load-json"
+          accept=".json"
+          onChange={handleLoadJSON}
+        ></input>
+        {/* do the same as above input but with a button */}
       </div>
     </div>
   );

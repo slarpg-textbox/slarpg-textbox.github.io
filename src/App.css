@@ -31,11 +31,9 @@ footer {
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  /* width: 576px;
-  height: 108px; */
   width: 640px;
   height: 120px;
-  /* Leo's is 640x120 so this is same aspect ratio of 5.333...*/
+  /** matches in-game size **/
   display: flex;
   vertical-align: center;
 }

@@ -27,10 +27,10 @@ import neutral from "./neutral.png";
 import shocked from "./shocked.png";
 import surprised_raised from "./surprised_raised.png";
 import surprised from "./surprised.png";
-import sus_side from "./sus_side.png";
 import smug_side from "./smug_side.png";
 import smug from "./smug.png";
-import sus from "./sus.png";
+import unamused from "./unamused.png";
+import unamused_side from "./unamused_side.png";
 
 export {
   AA_default,
@@ -62,8 +62,8 @@ export {
   shocked,
   surprised_raised,
   surprised,
-  sus_side,
   smug_side,
   smug,
-  sus,
+  unamused,
+  unamused_side,
 };
