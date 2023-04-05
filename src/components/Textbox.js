@@ -1,4 +1,5 @@
 import React from "react";
+import "./Textbox.css";
 
 const Textbox = ({
   heart,
@@ -12,10 +13,10 @@ const Textbox = ({
 }) => {
   return (
     <div className={`output ${heart} ${transparency}`}>
-      <div id="image">
+      <div id="image" className="face">
         <img src={face} alt="no image" width="96" height="96" />
       </div>
-      <div id="text">
+      <div id="text" className="text-face">
         {/* set font color to be characterColor */}
         <p id="subject" style={{ color: characterColor }}>
           {characterName}

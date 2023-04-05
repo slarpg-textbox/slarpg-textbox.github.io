@@ -1,3 +1,5 @@
+import * as none from "./none";
+
 // Main Characters
 import * as allison from "./allison/";
 import * as melody from "./melody/";
@@ -26,6 +28,7 @@ import * as slhrpg from "./slhrpg";
 import * as zinnia from "./zinnia";
 
 export {
+  none,
   allison,
   melody,
   javis,

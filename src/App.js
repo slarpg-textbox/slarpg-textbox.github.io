@@ -40,7 +40,13 @@ const App = () => {
     console.log(expressions);
     setTextCharacter(character.charAt(0).toUpperCase() + character.slice(1));
     setExpressions(Object.entries(expressions));
-    handleFace({ target: { value: expressions.AA_default } });
+
+    // TODO: WORK ON THIS
+    if (event.target.value === "none") {
+      setFace(null);
+    } else {
+      handleFace({ target: { value: expressions.AA_default } });
+    }
   };
   const handleFace = (event) => {
     // const expression = event.target.value;
@@ -171,6 +177,7 @@ const App = () => {
               </b>
               <br />
               <select value={character} onChange={handleCharacterChange}>
+                <option value="none">None</option>
                 <optgroup label="Main Characters">
                   <option value="melody">Melody</option>
                   <option value="allison">Allison</option>

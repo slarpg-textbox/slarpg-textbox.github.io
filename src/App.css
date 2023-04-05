@@ -1,8 +1,3 @@
-@font-face {
-  font-family: ChinaCat;
-  src: url(assets/fonts/chinacat.ttf);
-}
-
 .parent {
   display: flex;
   width: 50%;
@@ -24,55 +19,6 @@ footer {
   display: flex;
   /* justify-content: space-between; */
   max-width: 300px;
-}
-
-.output {
-  font-family: ChinaCat, Roboto, calibri;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 640px;
-  height: 120px;
-  /** matches in-game size **/
-  display: flex;
-  vertical-align: center;
-}
-.transparent {
-  background-color: transparent;
-}
-.no-transparent {
-  background-color: #36393f;
-}
-.heart {
-  background-image: url(assets/window/textbox_heart.png);
-}
-.no-heart {
-  background-image: url(assets/window/textbox_crop.png);
-}
-
-#image {
-  margin: 12px;
-  vertical-align: center;
-}
-#text {
-  margin: 12px 5px;
-  max-width: 500px;
-  max-height: 95px;
-  line-height: 1.3;
-  overflow: hidden;
-  word-break: break-all;
-  /* text-overflow: ellipsis; */
-  /* white-space: word-wrap; */
-  /* white-space: nowrap; */
-  /* font-size: 22px; */
-}
-#text p {
-  margin: 0;
-  white-space: pre-wrap;
-}
-
-#subject {
-  font-size: 18px;
 }
 
 .collection {
