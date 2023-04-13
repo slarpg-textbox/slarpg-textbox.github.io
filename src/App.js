@@ -16,7 +16,7 @@ const App = () => {
   const [faceVisible, setFaceVisibile] = useState("face-visible");
   const [face, setFace] = useState(icons.melody.AA_default);
   const [characterName, setTextCharacter] = useState("Melody");
-  const [characterColor, setCharacterColor] = useState("#fef08a");
+  const [characterColor, setCharacterColor] = useState("#fff178");
   const [dialogue, setTextDialogue] = useState("Hello slarpgers!");
   const [dialogueColor, setDialogueColor] = useState("#ffffff");
   const [dialogueSize, setDialogueSize] = useState("18");
@@ -41,6 +41,7 @@ const App = () => {
     const expressions = require(`./assets/faces/${character}/index.js`);
     setTextCharacter(character.charAt(0).toUpperCase() + character.slice(1));
     setExpressions(Object.entries(expressions));
+    handleFace({ target: { value: expressions.AA_default } });
   };
 
   const handleFace = (event) => {
@@ -203,10 +204,10 @@ const App = () => {
                 </optgroup>
                 <optgroup label="Enemies">
                   <option value="javis">Javis</option>
-                  <option value="sons">Sons</option>
                   <option value="verena">Verena</option>
                   <option value="paula">Paula</option>
                   <option value="harmony">Harmony</option>
+                  <option value="sons">Sons</option>
                 </optgroup>
                 <optgroup label="NPCs">
                   <option value="amelia">Amelia</option>
