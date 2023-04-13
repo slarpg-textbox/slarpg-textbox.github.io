@@ -13,6 +13,7 @@ const App = () => {
   const [expressions, setExpressions] = useState(
     Object.entries(require(`./assets/faces/melody/index.js`))
   );
+  const [faceVisible, setFaceVisibile] = useState("face-visible");
   const [face, setFace] = useState(icons.melody.AA_default);
   const [characterName, setTextCharacter] = useState("Melody");
   const [characterColor, setCharacterColor] = useState("#fef08a");
@@ -31,23 +32,17 @@ const App = () => {
   const handleDialogueSize = (event) => setDialogueSize(event.target.value);
   const handleScale = (event) => setScale(event.target.value);
   const handleHeart = (event) => setHeart(event.target.value);
+  const handleFaceVisibility = (event) => setFaceVisibile(event.target.value);
   // Loads all expressions for selected character
   const handleCharacterChange = (event) => {
     const character = event.target.value;
     setCharacter(character);
     // Load all the expressions for the selected character
     const expressions = require(`./assets/faces/${character}/index.js`);
-    console.log(expressions);
     setTextCharacter(character.charAt(0).toUpperCase() + character.slice(1));
     setExpressions(Object.entries(expressions));
-
-    // TODO: WORK ON THIS
-    if (event.target.value === "none") {
-      setFace(null);
-    } else {
-      handleFace({ target: { value: expressions.AA_default } });
-    }
   };
+
   const handleFace = (event) => {
     // const expression = event.target.value;
     // setSelectedExpression(expression);
@@ -81,6 +76,7 @@ const App = () => {
       heart: heart,
       transparency: transparency,
       face: face,
+      faceVisible,
       characterColor: characterColor,
       characterName: characterName,
       dialogueColor: dialogueColor,
@@ -96,6 +92,7 @@ const App = () => {
         heart: heart,
         transparency: transparency,
         face: face,
+        faceVisible,
         characterColor: characterColor,
         characterName: characterName,
         dialogueColor: dialogueColor,
@@ -105,6 +102,7 @@ const App = () => {
       const newOutputs = outputs.slice();
       newOutputs.splice(insertCollectionValue - 1, 0, newOutput);
       setOutputs(newOutputs);
+      console.log(newOutput, newOutput.length);
     }
   };
   const removeFromCollection = () => {
@@ -170,6 +168,26 @@ const App = () => {
           <h1>SLARPG Fake Quotes Generator</h1>
         </div>
         <div className="input">
+          <div>
+            <span>Face Visible 👩: </span>
+            <input
+              type="radio"
+              value="face-hidden"
+              name="face-visibility-switch"
+              checked={faceVisible === "face-hidden"}
+              onChange={handleFaceVisibility}
+            />
+            <label htmlFor="face-hidden">No</label>
+            <input
+              type="radio"
+              value="face-visible"
+              name="face-visibility-switch"
+              checked={faceVisible === "face-visible"}
+              onChange={handleFaceVisibility}
+            />
+            <label htmlFor="face-visible">Yes</label>
+          </div>
+
           <div className="faceselect-row">
             <div>
               <b>
@@ -177,7 +195,6 @@ const App = () => {
               </b>
               <br />
               <select value={character} onChange={handleCharacterChange}>
-                <option value="none">None</option>
                 <optgroup label="Main Characters">
                   <option value="melody">Melody</option>
                   <option value="allison">Allison</option>
@@ -267,7 +284,7 @@ const App = () => {
               value={dialogue}
               onChange={handleTextDialogue}
               rows="3"
-              cols="60"
+              cols="65"
             ></textarea>
             <br />
             <input
@@ -312,6 +329,7 @@ const App = () => {
         </div>
 
         <Textbox
+          faceVisible={faceVisible}
           heart={heart}
           transparency={transparency}
           face={face}
@@ -368,7 +386,7 @@ const App = () => {
 
         <footer>
           <p>
-            View the code/contribute here:{" "}
+            Code here:{" "}
             <a
               href="https://github.com/slarpg-textbox/slarpg-textbox.github.io"
               target="_blank"
@@ -381,7 +399,7 @@ const App = () => {
             <a href="https://slarpg.com/" target="_blank">
               Super Lesbian Animal RPG
             </a>{" "}
-            game and received permission to use and host from{" "}
+            game with permission to use/host from{" "}
             <a href="https://ponett.tumblr.com/" target="_blank">
               ponett
             </a>

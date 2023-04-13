@@ -5,6 +5,7 @@ const Textbox = ({
   heart,
   transparency,
   face,
+  faceVisible,
   characterColor,
   characterName,
   dialogueColor,
@@ -13,10 +14,10 @@ const Textbox = ({
 }) => {
   return (
     <div className={`output ${heart} ${transparency}`}>
-      <div id="image" className="face">
+      <div id="image" className={`${faceVisible}`}>
         <img src={face} alt="no image" width="96" height="96" />
       </div>
-      <div id="text" className="text-face">
+      <div id="text" className={`${faceVisible}`}>
         {/* set font color to be characterColor */}
         <p id="subject" style={{ color: characterColor }}>
           {characterName}

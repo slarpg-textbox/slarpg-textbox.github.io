@@ -30,15 +30,11 @@
 #image {
   margin: 12px;
   vertical-align: center;
-}
-.face {
-  /* set to default display value */
   display: inline-block;
 }
-.no-face {
-  display: none;
-}
 #text {
+  margin: 12px 5px;
+  max-width: 500px;
   max-height: 95px;
   line-height: 1.3;
   overflow: hidden;
@@ -46,13 +42,11 @@
   /* text-overflow: ellipsis; */
   /* white-space: word-wrap; */
   /* white-space: nowrap; */
-  /* font-size: 22px; */
 }
-.text-face {
-  margin: 12px 5px;
-  max-width: 500px;
+.face-hidden#image {
+  display: none;
 }
-.text-no-face {
+.face-hidden#text {
   margin: 12px 15px;
   max-width: 800px;
 }
