@@ -26,7 +26,17 @@ const App = () => {
 
   const handleTextCharacter = (event) => setTextCharacter(event.target.value);
   const handleCharacterColor = (event) => setCharacterColor(event.target.value);
-  const handleTransparency = (event) => setTransparency(event.target.value);
+  const handleTransparency = (event) => {
+    const outputs = document.getElementsByClassName("output");
+    for (let i = 0; i < outputs.length; i++) {
+      // set all the textboxes in the collections to be event.target.value
+      outputs[i].className = outputs[i].className.replace(
+        /no-transparent|transparent/g,
+        `${event.target.value}`
+      );
+    }
+    setTransparency(event.target.value);
+  };
   const handleTextDialogue = (event) => setTextDialogue(event.target.value);
   const handleDialogueColor = (event) => setDialogueColor(event.target.value);
   const handleDialogueSize = (event) => setDialogueSize(event.target.value);
